@@ -3,7 +3,7 @@ test prove:
   script:
   - git submodule update --init
   - ln -sfv $PWD/*.asd $HOME/quicklisp/local-projects/
-  - sbcl --quit --eval "(time (ql:quickload 'cl-cnn-test))" --eval "(time (prove:run :cl-cnn-test))"
+  - sbcl --quit --eval "(ql:quickload 'prove)" --eval "(ql:quickload 'cl-cnn-test)" --eval "(prove:run :cl-cnn-test)" | tee /tmp/log && ! grep -q 'tests failed' /tmp/log
   tags:
   - sbcl
   except:

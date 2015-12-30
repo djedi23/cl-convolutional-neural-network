@@ -17,4 +17,4 @@
                 ((:file "doc"))))
   :description ""
   :perform (load-op :after (op c)
-                    (cnn::make-readme.md)))
+                    (uiop:symbol-call :cnn :make-readme.md)))

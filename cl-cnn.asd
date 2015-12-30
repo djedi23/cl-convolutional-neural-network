@@ -11,7 +11,7 @@
   :version "0.1"
   :author "moise.valvassori"
   :license ""
-  :depends-on ()
+  :depends-on (:infix)
   :components ((:module "src"
                 :components
                 ((:file "volumes" :depends-on ("package"))

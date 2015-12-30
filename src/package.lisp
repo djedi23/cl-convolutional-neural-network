@@ -5,5 +5,6 @@
   (:use #:cl)
   (:export
    volume
+   value
    ))
 

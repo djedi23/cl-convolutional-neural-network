@@ -12,10 +12,10 @@ https://github.com/karpathy/convnetjs"
   (@volumes mgl-pax:section)
   )
 
-
-
 (mgl-pax:defsection @volumes (:title "Volumes")
   (volume class)
+  (value (method () (volume t t t)))
+  (setf-value (method () (volume t t t t)))
   )
 
 
@@ -43,7 +43,7 @@ https://github.com/karpathy/convnetjs"
 
 (defun section-to-filename (section)
   (asdf:system-relative-pathname
-   :cl-animation
+   :cl-cnn
    (format nil "../cl-cnn.wiki/~a.md"
            (string-downcase (subseq (symbol-name (mgl-pax:section-name section)) 1)))))
 

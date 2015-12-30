@@ -25,6 +25,25 @@
     (let ((n (* sx sy depth)))
 	  (setf w (make-array n :initial-element (if (slot-boundp object 'c) c 0)))
 	  (setf dw (make-array n :initial-element 0.0))
-	  (dotimes (i n)
-	    (setf (aref w i) (random (sqrt (/ 1 n)))))
-	  )))
+    (unless (slot-boundp object 'c)
+  	  (dotimes (i n)
+	      (setf (aref w i) (random (sqrt (/ 1 n)))))
+	  ))))
+
+
+(defun index-of (volume x y d)
+  (with-slots (sx depth) volume
+    #i((sx * y)+x)* depth + d))
+
+
+(defmethod value ((vol volume) x y d)
+  "Read the value at X Y D of the VOLUME."
+  (aref (slot-value vol 'w) (index-of vol x y d)))
+
+(defmethod setf-value ((vol volume) x y d v)
+  "Setter for VALUE"
+  (setf (aref (slot-value vol 'w) (index-of vol x y d)) v))
+
+(defsetf value setf-value "Setter for value")
+
+    

@@ -24,9 +24,9 @@ https://github.com/karpathy/convnetjs
 
 - [class] **VOLUME**
 
-    Vol is the basic building block of all data in a net.
-    it is essentially just a 3D volume of numbers, with a
-    width (sx), height (sy), and depth (depth).
+    `VOLUME` is the basic building block of all data in a NET.
+    It is essentially just a 3D volume of numbers, with a
+    width (SX), height (SY), and depth (`DEPTH`).
     it is used to hold data for all filters, all volumes,
     all weights, and also stores all gradients w.r.t. 
     the data. c is optionally a value to initialize the volume

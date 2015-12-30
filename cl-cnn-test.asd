@@ -14,7 +14,8 @@
                :prove)
   :components ((:module "t"
                 :components
-                ((:test-file "cl-cnn"))))
+                ((:test-file "cl-cnn")
+		 (:test-file "volumes"))))
   :description "Test system for cl-cnn"
 
   :defsystem-depends-on (:prove-asdf)

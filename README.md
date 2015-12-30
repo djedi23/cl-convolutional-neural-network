@@ -29,7 +29,7 @@ https://github.com/karpathy/convnetjs
     width (SX), height (SY), and depth (`DEPTH`).
     it is used to hold data for all filters, all volumes,
     all weights, and also stores all gradients w.r.t. 
-    the data. c is optionally a value to initialize the volume
-    with. If c is missing, fills the Vol with random numbers.
+    the data. C is optionally a value to initialize the `VOLUME`
+    with. If C is missing, fills the `VOLUME` with random numbers.
 
   [458c]: #x-28CL-CNN-3A-40VOLUMES-20MGL-PAX-3ASECTION-29 "Volumes"

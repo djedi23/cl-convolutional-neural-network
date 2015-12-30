@@ -15,14 +15,16 @@
   width (SX), height (SY), and depth (DEPTH).
   it is used to hold data for all filters, all volumes,
   all weights, and also stores all gradients w.r.t. 
-  the data. c is optionally a value to initialize the volume
-  with. If c is missing, fills the Vol with random numbers."))
+  the data. C is optionally a value to initialize the VOLUME
+  with. If C is missing, fills the VOLUME with random numbers."))
 
 
 (defmethod initialize-instance :after ((object volume) &key)
 ;;  (declare (optimize (debug 3)))
-  (with-slots (sx sy depth w dw) object
+  (with-slots (sx sy depth c w dw) object
     (let ((n (* sx sy depth)))
-	  (setf w (make-array n :initial-element 0.0))
+	  (setf w (make-array n :initial-element (if (slot-boundp object 'c) c 0)))
 	  (setf dw (make-array n :initial-element 0.0))
+	  (dotimes (i n)
+	    (setf (aref w i) (random (sqrt (/ 1 n)))))
 	  )))

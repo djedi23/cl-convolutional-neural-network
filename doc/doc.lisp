@@ -16,6 +16,10 @@ https://github.com/karpathy/convnetjs"
   (volume class)
   (value (method () (volume t t t)))
   (setf-value (method () (volume t t t t)))
+  (add-value (method () (volume t t t t)))
+  (grad (method () (volume t t t)))
+  (setf-grad (method () (volume t t t t)))
+  (add-grad (method () (volume t t t t)))
   )
 
 

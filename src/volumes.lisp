@@ -46,4 +46,24 @@
 
 (defsetf value setf-value "Setter for value")
 
-    
+(defmethod add-value ((vol volume) x y d v)
+  "Adder for VALUE"
+  (incf (aref (slot-value vol 'w) (index-of vol x y d)) v))
+
+
+
+(defmethod grad ((vol volume) x y d)
+  "Read the grad at X Y D of the VOLUME."
+  (aref (slot-value vol 'dw) (index-of vol x y d)))
+
+(defmethod setf-grad ((vol volume) x y d v)
+  "Setter for GRAD"
+  (setf (aref (slot-value vol 'dw) (index-of vol x y d)) v))
+
+(defsetf grad setf-grad "Setter for grad")
+
+(defmethod add-grad ((vol volume) x y d v)
+  "Adder for GRAD"
+  (incf (aref (slot-value vol 'dw) (index-of vol x y d)) v))
+
+

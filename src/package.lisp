@@ -6,5 +6,8 @@
   (:export
    volume
    value
+   add-value
+   grad
+   add-grad
    ))
 

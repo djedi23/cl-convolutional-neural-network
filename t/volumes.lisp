@@ -29,4 +29,31 @@
   (is (value vol 1 1 2) 20.0 "Read value 3")
 )
 
+(diag "Volume add value")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))
+  (is (value vol 1 1 2) 10.0 "Read value")
+  (add-value vol 1 1 2 5.0)
+  (is (value vol 1 1 2) 15.0 "Read added value")
+)
+
+
+(diag "Volume grad")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))
+  (is (grad vol 1 1 2) 0.0 "Read grad")
+  (is (cnn::setf-grad vol 1 1 2 15.0) 15.0 "set grad")
+  (is (grad vol 1 1 2) 15.0 "Read grad 2")
+  (setf (grad vol 1 1 2) 20.0)
+  (is (grad vol 1 1 2) 20.0 "Read grad 3")
+)
+
+(diag "Volume add grad")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))
+  (is (grad vol 1 1 2) 0.0 "Read grad")
+  (add-grad vol 1 1 2 5.0)
+  (is (grad vol 1 1 2) 5.0 "Read added grad")
+  (add-grad vol 1 1 2 10.0)
+  (is (grad vol 1 1 2) 15.0 "Read added grad")
+)
+
+
 (finalize)

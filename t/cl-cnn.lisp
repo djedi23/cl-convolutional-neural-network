@@ -10,5 +10,6 @@
 (plan nil)
 
 ;; blah blah blah.
+(ok t)
 
 (finalize)

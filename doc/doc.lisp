@@ -37,12 +37,15 @@ https://github.com/karpathy/convnetjs"
 (mgl-pax:defsection @layers (:title "Layers")
   (layer class)
   (forward generic-function)
+  (backward generic-function)
+  (get-params-and-grads generic-function)
   
   (@input-layer mgl-pax:section)
   )
 
 (mgl-pax:defsection @input-layer (:title "Input Layers")
   (input class)
+  (forward (method () (input volume)))
   )
 
 

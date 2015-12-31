@@ -8,3 +8,9 @@
    (out-depth :initarg :depth :reader depth :documentation "Layer depth")
    )  
  (:documentation "Input Layer"))
+
+(defmethod forward ((input input) (vol volume) &optional is-training)
+  (setf (in-act input) vol)
+  (setf (out-act input) vol)
+  vol)
+

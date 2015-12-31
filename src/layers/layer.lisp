@@ -8,5 +8,11 @@
    ))
 
 
-(defgeneric forward (volume &optional is-training)
-  (:documentation "Forward the values of VOLUME"))
+(defgeneric forward (layer-or-net volume &optional is-training)
+  (:documentation "Forward the values of VOLUME in the LAYER or the NET"))
+
+(defgeneric backward (layer-or-net)
+  (:documentation "Backpropagation"))
+
+(defgeneric get-params-and-grads (layer-or-net)
+  (:documentation ""))

@@ -119,9 +119,21 @@ https://github.com/karpathy/convnetjs
 
 <a id='x-28CL-CNN-3AFORWARD-20GENERIC-FUNCTION-29'></a>
 
-- [generic-function] **FORWARD** *VOLUME &OPTIONAL IS-TRAINING*
+- [generic-function] **FORWARD** *LAYER-OR-NET VOLUME &OPTIONAL IS-TRAINING*
 
-    Forward the values of `VOLUME`
+    Forward the values of `VOLUME` in the [`LAYER`][b1b6] or the [`NET`][2a65]
+
+<a id='x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29'></a>
+
+- [generic-function] **BACKWARD** *LAYER-OR-NET*
+
+    Backpropagation
+
+<a id='x-28CL-CNN-3AGET-PARAMS-AND-GRADS-20GENERIC-FUNCTION-29'></a>
+
+- [generic-function] **GET-PARAMS-AND-GRADS** *LAYER-OR-NET*
+
+
 
 <a id='x-28CL-CNN-3A-40INPUT-LAYER-20MGL-PAX-3ASECTION-29'></a>
 
@@ -132,6 +144,10 @@ https://github.com/karpathy/convnetjs
 - [class] **INPUT** *[LAYER][b1b6]*
 
     Input Layer
+
+<a id='x-28CL-CNN-3AFORWARD-20-28METHOD-20NIL-20-28CL-CNN-3AINPUT-20CL-CNN-3AVOLUME-29-29-29'></a>
+
+- [method] **FORWARD** *(INPUT INPUT) (VOL VOLUME)*
 
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"

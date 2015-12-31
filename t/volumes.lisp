@@ -55,5 +55,51 @@
   (is (grad vol 1 1 2) 15.0 "Read added grad")
 )
 
+(diag "Volume clone & 0")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))
+  (let ((vol1 (clone-and-zero vol)))
+    (ok vol1)
+    (is (slot-value vol1 'cnn::sx) 2)
+    (is (slot-value vol1 'cnn::sy) 3)
+    (is (slot-value vol1 'cnn::depth) 4)
+    
+    (is (array-dimension (slot-value vol1 'cnn::w) 0) (* 2 3 4) "Volume allocation size")
+    (is (array-dimension (slot-value vol1 'cnn::dw) 0) (* 2 3 4) "Volume allocation size")
+    (is (value vol1 1 1 2) 0.0 "Read value")
+    ))
+
+(diag "Volume clone")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))
+  (let ((vol1 (clone vol)))
+    (ok vol1)
+    (is (slot-value vol1 'cnn::sx) 2)
+    (is (slot-value vol1 'cnn::sy) 3)
+    (is (slot-value vol1 'cnn::depth) 4)
+    
+    (is (array-dimension (slot-value vol1 'cnn::w) 0) (* 2 3 4) "Volume allocation size")
+    (is (array-dimension (slot-value vol1 'cnn::dw) 0) (* 2 3 4) "Volume allocation size")
+    (is (value vol1 1 1 2) 10.0 "Read value")
+    ))
+
+(diag "Volume add")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0))
+      (vol1 (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 5.0)))
+  (add vol vol1)
+  (is (value vol 1 1 2) 15.0 "Read value")
+  )
+
+(diag "Volume add scaled")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0))
+      (vol1 (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 5.0)))
+  (add-scaled vol vol1 10)
+  (is (value vol 1 1 2) 60.0 "Read value")
+  )
+
+(diag "Volume add scaled")
+(let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))
+  (setf (const vol) 20.0)
+  (is (value vol 1 1 2) 20.0 "Read value")
+  )
+
 
 (finalize)

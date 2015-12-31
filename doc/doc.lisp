@@ -20,6 +20,11 @@ https://github.com/karpathy/convnetjs"
   (grad (method () (volume t t t)))
   (setf-grad (method () (volume t t t t)))
   (add-grad (method () (volume t t t t)))
+  (clone (method () (volume)))
+  (clone-and-zero (method () (volume)))
+  (add (method () (volume volume)))
+  (add-scaled (method () (volume volume t)))
+  (set-const (method () (volume t)))
   )
 
 

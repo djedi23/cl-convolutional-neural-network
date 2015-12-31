@@ -4,9 +4,9 @@
 
 
 (defclass volume ()
-  ((sx :initarg :sx :documentation "Volume width")
-   (sy :initarg :sy :documentation "Volume height")
-   (depth :initarg :depth :documentation "Volume depth")
+  ((sx :initarg :sx :reader sx :documentation "Volume width")
+   (sy :initarg :sy :reader sy :documentation "Volume height")
+   (depth :initarg :depth :reader depth :documentation "Volume depth")
    (c :initarg :c)
    (w)
    (dw))
@@ -66,4 +66,40 @@
   "Adder for GRAD"
   (incf (aref (slot-value vol 'dw) (index-of vol x y d)) v))
 
+(defmethod clone-and-zero ((vol volume))
+  (make-instance 'volume :sx (sx vol) :sy (sy vol) :depth (depth vol) :c 0.0))
 
+(defmethod clone ((vol volume))
+  (let ((new (clone-and-zero vol)))
+    (setf (slot-value new 'w) (make-array (array-dimension (slot-value vol 'w) 0)
+					  :initial-contents (slot-value vol 'w)))
+    new
+    ))
+
+(defmethod add ((v1 volume) (v2 volume))
+  "Add value of V2 in V1"
+  (loop for wv1 across (slot-value v1 'w)
+     for wv2 across (slot-value v2 'w)
+       for i from 0 
+     do
+       (setf (aref (slot-value v1 'w) i)
+	     (+ wv1 wv2)))
+  v1)
+
+(defmethod add-scaled ((v1 volume) (v2 volume) scale)
+  "Add SCALED value of V2 in V1"
+  (loop for wv1 across (slot-value v1 'w)
+     for wv2 across (slot-value v2 'w)
+       for i from 0 
+     do
+       (setf (aref (slot-value v1 'w) i)
+	     (+ wv1 (* scale wv2))))
+  v1)
+
+(defmethod set-const ((vol volume) v)
+  "Set a constant Value in VOL"
+  (setf (slot-value vol 'w) (make-array (array-dimension (slot-value vol 'w) 0)
+					:initial-element v))
+  vol
+  )
+(defsetf const set-const "Set constant")

@@ -9,5 +9,11 @@
    add-value
    grad
    add-grad
+   clone
+   clone-and-zero
+   add
+   add-scaled
+   const
+   set-const
    ))
 

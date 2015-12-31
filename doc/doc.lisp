@@ -11,6 +11,8 @@ Translate from:
 https://github.com/karpathy/convnetjs"
   (@volumes mgl-pax:section)
   (@net mgl-pax:section)
+
+  (@layers mgl-pax:section)
   )
 
 (mgl-pax:defsection @volumes (:title "Volumes")
@@ -32,6 +34,17 @@ https://github.com/karpathy/convnetjs"
   (net class)
   )
 
+(mgl-pax:defsection @layers (:title "Layers")
+  (layer class)
+  (forward generic-function)
+  
+  (@input-layer mgl-pax:section)
+  )
+
+(mgl-pax:defsection @input-layer (:title "Input Layers")
+  (input class)
+  )
+
 
 
 (defun make-readme.md ()
@@ -43,6 +56,8 @@ https://github.com/karpathy/convnetjs"
 
 (defun update-wiki ()
   (let ((sections (list
+		   @input-layer
+		   @layers
 		   @net
 		   @volumes
 		   @main

@@ -1,5 +1,5 @@
 #|
-  This file is a part of cl-cnn project.
+This file is a part of cl-cnn project.
 |#
 
 (in-package :cl-user)
@@ -13,10 +13,12 @@
   :depends-on (:cl-cnn
                :prove)
   :components ((:module "t"
-                :components
-                ((:test-file "cl-cnn")
-		 (:test-file "volumes")
-		 (:test-file "net"))))
+			:components
+			((:test-file "cl-cnn")
+			 (:test-file "volumes")
+ 			 (:test-file "net")
+			 (:test-file "input-layer")
+			 )))
   :description "Test system for cl-cnn"
 
   :defsystem-depends-on (:prove-asdf)

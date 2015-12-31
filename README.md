@@ -6,6 +6,8 @@
 
 - [1 Volumes][458c]
 - [2 Networks][3b14]
+- [3 Layers][85dc]
+    - [3.1 Input Layers][42a3]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -107,9 +109,36 @@ https://github.com/karpathy/convnetjs
     
     For now constraints: Simple linear order of layers, first layer input last layer a cost layer
 
+<a id='x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29'></a>
+
+## 3 Layers
+
+<a id='x-28CL-CNN-3ALAYER-20CLASS-29'></a>
+
+- [class] **LAYER**
+
+<a id='x-28CL-CNN-3AFORWARD-20GENERIC-FUNCTION-29'></a>
+
+- [generic-function] **FORWARD** *VOLUME &OPTIONAL IS-TRAINING*
+
+    Forward the values of `VOLUME`
+
+<a id='x-28CL-CNN-3A-40INPUT-LAYER-20MGL-PAX-3ASECTION-29'></a>
+
+### 3.1 Input Layers
+
+<a id='x-28CL-CNN-3AINPUT-20CLASS-29'></a>
+
+- [class] **INPUT** *[LAYER][b1b6]*
+
+    Input Layer
+
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"
   [3b14]: #x-28CL-CNN-3A-40NET-20MGL-PAX-3ASECTION-29 "Networks"
+  [42a3]: #x-28CL-CNN-3A-40INPUT-LAYER-20MGL-PAX-3ASECTION-29 "Input Layers"
   [458c]: #x-28CL-CNN-3A-40VOLUMES-20MGL-PAX-3ASECTION-29 "Volumes"
   [674e]: #x-28CL-CNN-3AGRAD-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:GRAD (METHOD NIL (CL-CNN:VOLUME T T T)))"
+  [85dc]: #x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29 "Layers"
+  [b1b6]: #x-28CL-CNN-3ALAYER-20CLASS-29 "(CL-CNN:LAYER CLASS)"
   [dfd4]: #x-28CL-CNN-3AVOLUME-20CLASS-29 "(CL-CNN:VOLUME CLASS)"

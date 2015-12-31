@@ -13,11 +13,17 @@
   :license ""
   :depends-on (:infix)
   :components ((:module "src"
-                :components
-                ((:file "volumes" :depends-on ("package"))
-		 (:file "net" :depends-on ("package"))
-		 (:file "cl-cnn")
-		 (:file "package"))))
+			:components
+			((:file "volumes" :depends-on ("package"))
+			 (:file "net" :depends-on ("package"))
+			 (:file "cl-cnn")
+			 (:file "package")
+			 (:module "layers"
+				  :components
+				  ((:file "layer")
+				   (:file "input" :depends-on ("layer"))
+				   ))
+			 )))
   :description ""
   :long-description
   #.(with-open-file (stream (merge-pathnames

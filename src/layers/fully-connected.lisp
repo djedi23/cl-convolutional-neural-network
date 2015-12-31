@@ -16,7 +16,7 @@
 
    (num-inputs :reader num-inputs)
    filters
-   (bias :initarg :bias :initform 0  :documentation "Initial bias")
+   (bias :initarg :bias :initform 0.0 :documentation "Initial bias")
    biases
    )  
  (:documentation "Full connected Layer"))
@@ -25,7 +25,12 @@
 ;;  (declare (optimize (debug 3)))
   (with-slots (in-sx in-sy in-depth out-depth num-inputs filters bias biases) object
     (setf num-inputs (* in-sx in-sy in-depth))
-    (setf filters (make-array out-depth :initial-element (make-instance 'volume :sx 1 :sy 1 :depth num-inputs)))
+    (setf filters (make-array out-depth))
+    (loop for filter across filters
+       for i from 0
+       do
+	 (setf (aref filters i) (make-instance 'volume :sx 1 :sy 1 :depth num-inputs)))
+    (setf biases (make-instance 'volume :sx 1 :sy 1 :depth out-depth :c bias))
     ))
 
 (defmethod forward ((input fully-connected) (vol volume) &optional is-training)

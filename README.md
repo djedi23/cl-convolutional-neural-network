@@ -24,7 +24,7 @@ https://github.com/karpathy/convnetjs
 
 ## 1 Volumes
 
-The entire library is based around transforming 3-dimensional volumes of numbers. These volumes are stored in the `VOL` class, which is at the heart of the library. The `VOL` class is a wrapper around:
+The entire library is based around transforming 3-dimensional volumes of numbers. These volumes are stored in the [`VOLUME`][dfd4] class, which is at the heart of the library. The [`VOLUME`][dfd4] class is a wrapper around:
  - a 1-dimensional list of numbers (the activations, in field .w)
  - their gradients (field .dw)
  - and lastly contains three dimensions (fields .sx, .sy, .depth).
@@ -131,7 +131,7 @@ vol3d.get(2,0,1) // returns 5.0
 
 ## 2 Networks
 
-A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][b1b6]. When an example (in form of a Vol) is passed through the [`NET`][2a65], the Net simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last layer. Similarly, during backpropagation the Net calls the [`BACKWARD`][8779] function of each layer in turn to compute the gradient.
+A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][b1b6]. When an example (in form of a [`VOLUME`][dfd4]) is passed through the [`NET`][2a65], the [`NET`][2a65] simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last [`LAYER`][b1b6]. Similarly, during backpropagation the Net calls the [`BACKWARD`][8779] function of each layer in turn to compute the gradient.
 
 <a id='x-28CL-CNN-3ANET-20CLASS-29'></a>
 
@@ -145,7 +145,7 @@ A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][
 
 ## 3 Layers
 
-As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOL` and produces a new output `VOL`, which is why I prefer to refer to them as transformers.
+As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input [`VOLUME`][dfd4] and produces a new output [`VOLUME`][dfd4], which is why I prefer to refer to them as transformers.
 
 Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
 

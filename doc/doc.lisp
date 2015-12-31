@@ -16,7 +16,7 @@ https://github.com/karpathy/convnetjs"
   )
 
 (mgl-pax:defsection @volumes (:title "Volumes")
-"The entire library is based around transforming 3-dimensional volumes of numbers. These volumes are stored in the VOL class, which is at the heart of the library. The VOL class is a wrapper around:
+"The entire library is based around transforming 3-dimensional volumes of numbers. These volumes are stored in the VOLUME class, which is at the heart of the library. The VOLUME class is a wrapper around:
  - a 1-dimensional list of numbers (the activations, in field .w)
  - their gradients (field .dw)
  - and lastly contains three dimensions (fields .sx, .sy, .depth).
@@ -60,12 +60,12 @@ vol3d.get(2,0,1) // returns 5.0
   )
 
 (mgl-pax:defsection @net (:title "Networks")
-  "A NET is a very simple class that simply contains a list of LAYER. When an example (in form of a Vol) is passed through the NET, the Net simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last layer. Similarly, during backpropagation the Net calls the BACKWARD function of each layer in turn to compute the gradient."
+  "A NET is a very simple class that simply contains a list of LAYER. When an example (in form of a VOLUME) is passed through the NET, the NET simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last LAYER. Similarly, during backpropagation the Net calls the BACKWARD function of each layer in turn to compute the gradient."
   (net class)
   )
 
 (mgl-pax:defsection @layers (:title "Layers")
-"As mentioned, every Network (NET) is just a linear list of layers. Your first layer must be 'INPUT' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input VOL and produces a new output VOL, which is why I prefer to refer to them as transformers.
+"As mentioned, every Network (NET) is just a linear list of layers. Your first layer must be 'INPUT' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input VOLUME and produces a new output VOLUME, which is why I prefer to refer to them as transformers.
 
 Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
 

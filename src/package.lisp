@@ -17,5 +17,12 @@
    set-const
 
    net
+
+   forward
+   backward
+   get-params-and-grads
+   
+   input
+   layer
    ))
 

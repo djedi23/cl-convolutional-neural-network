@@ -8,7 +8,7 @@
 - [2 Networks][3b14]
 - [3 Layers][85dc]
     - [3.1 Input Layers][42a3]
-    - [3.2 Input Layers][29e6]
+    - [3.2 Fully connected Layers][29e6]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -23,6 +23,35 @@ https://github.com/karpathy/convnetjs
 <a id='x-28CL-CNN-3A-40VOLUMES-20MGL-PAX-3ASECTION-29'></a>
 
 ## 1 Volumes
+
+The entire library is based around transforming 3-dimensional volumes of numbers. These volumes are stored in the `VOL` class, which is at the heart of the library. The `VOL` class is a wrapper around:
+ - a 1-dimensional list of numbers (the activations, in field .w)
+ - their gradients (field .dw)
+ - and lastly contains three dimensions (fields .sx, .sy, .depth).
+
+Here are some examples:
+
+```js
+// create a Vol of size 32x32x3, and filled with random numbers
+var v = new convnetjs.Vol(32, 32, 3);
+var v = new convnetjs.Vol(32, 32, 3, 0.0); // same volume but init with zeros
+var v = new convnetjs.Vol(1, 1, 3); // a 1x1x3 Vol with random numbers
+ 
+// you can also initialize with a specific list. E.g. create a 1x1x3 Vol:
+var v = new convnetjs.Vol([1.2, 3.5, 3.6]);
+ 
+// the Vol is a wrapper around two lists: .w and .dw, which both have 
+// sx * sy * depth number of elements. E.g:
+v.w[0] // contains 1.2
+v.dw[0] // contains 0, because gradients are initialized with zeros
+ 
+// you can also access the 3-D Vols with getters and setters
+// but these are subject to function call overhead
+var vol3d = new convnetjs.Vol(10, 10, 5);
+vol3d.set(2,0,1,5.0); // set coordinate (2,0,1) to 5.0
+vol3d.get(2,0,1) // returns 5.0
+```
+
 
 <a id='x-28CL-CNN-3AVOLUME-20CLASS-29'></a>
 
@@ -102,6 +131,8 @@ https://github.com/karpathy/convnetjs
 
 ## 2 Networks
 
+A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][b1b6]. When an example (in form of a Vol) is passed through the [`NET`][2a65], the Net simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last layer. Similarly, during backpropagation the Net calls the [`BACKWARD`][8779] function of each layer in turn to compute the gradient.
+
 <a id='x-28CL-CNN-3ANET-20CLASS-29'></a>
 
 - [class] **NET**
@@ -113,6 +144,33 @@ https://github.com/karpathy/convnetjs
 <a id='x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29'></a>
 
 ## 3 Layers
+
+As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOL` and produces a new output `VOL`, which is why I prefer to refer to them as transformers.
+
+Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
+
+```javascript
+var layer_defs = [];
+// minimal network: a simple binary SVM classifer in 2-dimensional space
+layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:2});
+layer_defs.push({type:'svm', num_classes:2});
+ 
+// create a net
+var net = new convnetjs.Net();
+net.makeLayers(layer_defs);
+ 
+// create a 1x1x2 volume of input activations:
+var x = new convnetjs.Vol(1,1,2);
+x.w[0] = 0.5; // w is the field holding the actual data
+x.w[1] = -1.3;
+// a shortcut for the above is var x = new convnetjs.Vol([0.5, -1.3]);
+ 
+var scores = net.forward(x); // pass forward through network
+// scores is now a Vol() of output activations
+console.log('score for class 0 is assigned:'  + scores.w[0]); 
+```
+
+ 
 
 <a id='x-28CL-CNN-3ALAYER-20CLASS-29'></a>
 
@@ -152,7 +210,7 @@ https://github.com/karpathy/convnetjs
 
 <a id='x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29'></a>
 
-### 3.2 Input Layers
+### 3.2 Fully connected Layers
 
 <a id='x-28CL-CNN-3AFULLY-CONNECTED-20CLASS-29'></a>
 
@@ -165,12 +223,14 @@ https://github.com/karpathy/convnetjs
 - [method] **FORWARD** *(INPUT FULLY-CONNECTED) (VOL VOLUME)*
 
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
-  [29e6]: #x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29 "Input Layers"
+  [29e6]: #x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29 "Fully connected Layers"
   [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"
   [3b14]: #x-28CL-CNN-3A-40NET-20MGL-PAX-3ASECTION-29 "Networks"
   [42a3]: #x-28CL-CNN-3A-40INPUT-LAYER-20MGL-PAX-3ASECTION-29 "Input Layers"
   [458c]: #x-28CL-CNN-3A-40VOLUMES-20MGL-PAX-3ASECTION-29 "Volumes"
+  [65ae]: #x-28CL-CNN-3AINPUT-20CLASS-29 "(CL-CNN:INPUT CLASS)"
   [674e]: #x-28CL-CNN-3AGRAD-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:GRAD (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [85dc]: #x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29 "Layers"
+  [8779]: #x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29 "(CL-CNN:BACKWARD GENERIC-FUNCTION)"
   [b1b6]: #x-28CL-CNN-3ALAYER-20CLASS-29 "(CL-CNN:LAYER CLASS)"
   [dfd4]: #x-28CL-CNN-3AVOLUME-20CLASS-29 "(CL-CNN:VOLUME CLASS)"

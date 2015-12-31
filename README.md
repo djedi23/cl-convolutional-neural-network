@@ -5,6 +5,7 @@
 ## Table of Contents
 
 - [1 Volumes][458c]
+- [2 Networks][3b14]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -24,7 +25,7 @@ https://github.com/karpathy/convnetjs
 
 - [class] **VOLUME**
 
-    `VOLUME` is the basic building block of all data in a NET.
+    `VOLUME` is the basic building block of all data in a [`NET`][2a65].
     It is essentially just a 3D volume of numbers, with a
     width (SX), height (SY), and depth (`DEPTH`).
     it is used to hold data for all filters, all volumes,
@@ -94,7 +95,21 @@ https://github.com/karpathy/convnetjs
 
     Set a constant Value in `VOL`
 
+<a id='x-28CL-CNN-3A-40NET-20MGL-PAX-3ASECTION-29'></a>
+
+## 2 Networks
+
+<a id='x-28CL-CNN-3ANET-20CLASS-29'></a>
+
+- [class] **NET**
+
+    Net manages a set of layers
+    
+    For now constraints: Simple linear order of layers, first layer input last layer a cost layer
+
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
+  [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"
+  [3b14]: #x-28CL-CNN-3A-40NET-20MGL-PAX-3ASECTION-29 "Networks"
   [458c]: #x-28CL-CNN-3A-40VOLUMES-20MGL-PAX-3ASECTION-29 "Volumes"
   [674e]: #x-28CL-CNN-3AGRAD-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:GRAD (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [dfd4]: #x-28CL-CNN-3AVOLUME-20CLASS-29 "(CL-CNN:VOLUME CLASS)"

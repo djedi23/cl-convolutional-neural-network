@@ -10,6 +10,7 @@
 Translate from:
 https://github.com/karpathy/convnetjs"
   (@volumes mgl-pax:section)
+  (@net mgl-pax:section)
   )
 
 (mgl-pax:defsection @volumes (:title "Volumes")
@@ -27,6 +28,10 @@ https://github.com/karpathy/convnetjs"
   (set-const (method () (volume t)))
   )
 
+(mgl-pax:defsection @net (:title "Networks")
+  (net class)
+  )
+
 
 
 (defun make-readme.md ()
@@ -38,6 +43,7 @@ https://github.com/karpathy/convnetjs"
 
 (defun update-wiki ()
   (let ((sections (list
+		   @net
 		   @volumes
 		   @main
 		   )))

@@ -15,6 +15,7 @@
   :components ((:module "src"
                 :components
                 ((:file "volumes" :depends-on ("package"))
+		 (:file "net" :depends-on ("package"))
 		 (:file "cl-cnn")
 		 (:file "package"))))
   :description ""

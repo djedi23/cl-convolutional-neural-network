@@ -18,6 +18,7 @@ This file is a part of cl-cnn project.
 			 (:test-file "volumes")
  			 (:test-file "net")
 			 (:test-file "input-layer")
+			 (:test-file "fully-connected-layer")
 			 )))
   :description "Test system for cl-cnn"
 

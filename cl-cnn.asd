@@ -22,6 +22,7 @@
 				  :components
 				  ((:file "layer")
 				   (:file "input" :depends-on ("layer"))
+				   (:file "fully-connected" :depends-on ("layer"))
 				   ))
 			 )))
   :description ""

@@ -48,6 +48,11 @@ https://github.com/karpathy/convnetjs"
   (forward (method () (input volume)))
   )
 
+(mgl-pax:defsection @fully-connected-layer (:title "Input Layers")
+  (fully-connected class)
+  (forward (method () (fully-connected volume)))
+  )
+
 
 
 (defun make-readme.md ()

@@ -24,5 +24,6 @@
    
    input
    layer
+   fully-connected
    ))
 

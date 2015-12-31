@@ -41,6 +41,7 @@ https://github.com/karpathy/convnetjs"
   (get-params-and-grads generic-function)
   
   (@input-layer mgl-pax:section)
+  (@fully-connected-layer mgl-pax:section)
   )
 
 (mgl-pax:defsection @input-layer (:title "Input Layers")

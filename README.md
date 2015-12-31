@@ -8,6 +8,7 @@
 - [2 Networks][3b14]
 - [3 Layers][85dc]
     - [3.1 Input Layers][42a3]
+    - [3.2 Input Layers][29e6]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -149,7 +150,22 @@ https://github.com/karpathy/convnetjs
 
 - [method] **FORWARD** *(INPUT INPUT) (VOL VOLUME)*
 
+<a id='x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29'></a>
+
+### 3.2 Input Layers
+
+<a id='x-28CL-CNN-3AFULLY-CONNECTED-20CLASS-29'></a>
+
+- [class] **FULLY-CONNECTED** *[LAYER][b1b6]*
+
+    Full connected Layer
+
+<a id='x-28CL-CNN-3AFORWARD-20-28METHOD-20NIL-20-28CL-CNN-3AFULLY-CONNECTED-20CL-CNN-3AVOLUME-29-29-29'></a>
+
+- [method] **FORWARD** *(INPUT FULLY-CONNECTED) (VOL VOLUME)*
+
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
+  [29e6]: #x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29 "Input Layers"
   [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"
   [3b14]: #x-28CL-CNN-3A-40NET-20MGL-PAX-3ASECTION-29 "Networks"
   [42a3]: #x-28CL-CNN-3A-40INPUT-LAYER-20MGL-PAX-3ASECTION-29 "Input Layers"

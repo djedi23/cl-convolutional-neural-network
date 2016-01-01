@@ -107,6 +107,7 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
   )
 
 (mgl-pax:defsection @fully-connected-layer (:title "Fully connected Layers")
+  (fully-connected function)
   (fully-connected class)
   (forward (method () (fully-connected volume)))
   (backward (method () (fully-connected)))

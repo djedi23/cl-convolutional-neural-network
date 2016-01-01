@@ -32,6 +32,7 @@
 	 (setf (aref filters i) (make-instance 'volume :sx 1 :sy 1 :depth num-inputs)))
     (setf biases (make-instance 'volume :sx 1 :sy 1 :depth out-depth :c bias))
     ))
+(constructor fully-connected)
 
 (defmethod forward ((input fully-connected) (vol volume) &optional is-training)
   (with-slots (in-act out-act out-depth filters biases) input
@@ -49,3 +50,16 @@
       (setf out-act A)
       out-act
       )))
+
+(defmethod backward ((input fully-connected))
+  (with-slots (in-act out-act out-depth filters biases) input
+    (let* ((V in-act))
+      (setf (dw V) (make-array (array-dimension (w V) 0) :initial-element 0.0))
+      (dotimes (i out-depth)
+	(let ((tfi (aref filters i))
+	      (chain_grad (aref (dw out_act) i)))
+	  (dotimes (d (num-inputs input))
+	    (incf (aref (dw V) d) (* (aref (w tfi) d) chain_grad))
+	    (incf (aref (dw tfi) d) (* (aref (w V) d) chain_grad)))
+	  (incf (aref (dw biases) i) chain_grad)
+	  )))))

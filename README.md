@@ -218,6 +218,12 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
 
 ### 3.2 Fully connected Layers
 
+<a id='x-28CL-CNN-3AFULLY-CONNECTED-20FUNCTION-29'></a>
+
+- [function] **FULLY-CONNECTED** *&REST REST*
+
+    Constructor for the class [`FULLY-CONNECTED`][618c]
+
 <a id='x-28CL-CNN-3AFULLY-CONNECTED-20CLASS-29'></a>
 
 - [class] **FULLY-CONNECTED** *[LAYER][b1b6]*
@@ -238,6 +244,7 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
   [3b14]: #x-28CL-CNN-3A-40NET-20MGL-PAX-3ASECTION-29 "Networks"
   [42a3]: #x-28CL-CNN-3A-40INPUT-LAYER-20MGL-PAX-3ASECTION-29 "Input Layers"
   [458c]: #x-28CL-CNN-3A-40VOLUMES-20MGL-PAX-3ASECTION-29 "Volumes"
+  [618c]: #x-28CL-CNN-3AFULLY-CONNECTED-20CLASS-29 "(CL-CNN:FULLY-CONNECTED CLASS)"
   [65ae]: #x-28CL-CNN-3AINPUT-20CLASS-29 "(CL-CNN:INPUT CLASS)"
   [674e]: #x-28CL-CNN-3AGRAD-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:GRAD (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [85dc]: #x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29 "Layers"

@@ -14,8 +14,9 @@
   :depends-on (:infix)
   :components ((:module "src"
 			:components
-			((:file "volumes" :depends-on ("package"))
-			 (:file "net" :depends-on ("package"))
+			((:file "utils" :depends-on ("package"))
+			 (:file "volumes" :depends-on ("utils"))
+			 (:file "net" :depends-on ("utils"))
 			 (:file "cl-cnn")
 			 (:file "package")
 			 (:module "layers"

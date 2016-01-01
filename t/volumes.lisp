@@ -20,6 +20,13 @@
   (is (+ (aref (slot-value vol 'cnn::w) 0) (aref (slot-value vol 'cnn::w) 1)) 20.0 "init avec C")
   )
 
+(diag "Construteur Volume")
+(let ((vol (volume :sx 2 :sy 3 :depth 4 :c 10.0)))
+  (ok vol)
+  (is (+ (aref (slot-value vol 'cnn::w) 0) (aref (slot-value vol 'cnn::w) 1)) 20.0 "init avec C")
+  )
+
+
 (diag "Volume value")
 (let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))
   (is (value vol 1 1 2) 10.0 "Read value")

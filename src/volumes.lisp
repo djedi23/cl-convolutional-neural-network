@@ -9,7 +9,7 @@
    (depth :initarg :depth :reader depth :documentation "Volume depth")
    (c :initarg :c)
    (w :reader w)
-   (dw))
+   (dw :accessor dw))
   (:documentation "VOLUME is the basic building block of all data in a NET.
   It is essentially just a 3D volume of numbers, with a
   width (SX), height (SY), and depth (DEPTH).
@@ -29,6 +29,9 @@
   	  (dotimes (i n)
 	      (setf (aref w i) (random (sqrt (/ 1 n)))))
 	  ))))
+
+(constructor volume)
+
 
 
 (defun index-of (volume x y d)

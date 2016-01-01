@@ -65,11 +65,17 @@ vol3d.get(2,0,1) // returns 5.0
     the data. C is optionally a value to initialize the `VOLUME`
     with. If C is missing, fills the `VOLUME` with random numbers.
 
+<a id='x-28CL-CNN-3AVOLUME-20FUNCTION-29'></a>
+
+- [function] **VOLUME** *&REST REST*
+
+    Constructor for the class [`VOLUME`][dfd4]
+
 <a id='x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29'></a>
 
 - [method] **VALUE** *(VOL VOLUME) X Y D*
 
-    Read the value at `X` `Y` `D` of the [`VOLUME`][dfd4].
+    Read the value at `X` `Y` `D` of the `VOLUME`([`0`][d757] [`1`][dfd4]).
 
 <a id='x-28CL-CNN-3A-3ASETF-VALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-20T-29-29-29'></a>
 
@@ -87,7 +93,7 @@ vol3d.get(2,0,1) // returns 5.0
 
 - [method] **GRAD** *(VOL VOLUME) X Y D*
 
-    Read the grad at `X` `Y` `D` of the [`VOLUME`][dfd4].
+    Read the grad at `X` `Y` `D` of the `VOLUME`([`0`][d757] [`1`][dfd4]).
 
 <a id='x-28CL-CNN-3A-3ASETF-GRAD-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-20T-29-29-29'></a>
 
@@ -131,7 +137,7 @@ vol3d.get(2,0,1) // returns 5.0
 
 ## 2 Networks
 
-A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][b1b6]. When an example (in form of a [`VOLUME`][dfd4]) is passed through the [`NET`][2a65], the [`NET`][2a65] simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last [`LAYER`][b1b6]. Similarly, during backpropagation the Net calls the [`BACKWARD`][8779] function of each layer in turn to compute the gradient.
+A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][b1b6]. When an example (in form of a `VOLUME`([`0`][d757] [`1`][dfd4])) is passed through the [`NET`][2a65], the [`NET`][2a65] simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last [`LAYER`][b1b6]. Similarly, during backpropagation the Net calls the [`BACKWARD`][8779] function of each layer in turn to compute the gradient.
 
 <a id='x-28CL-CNN-3ANET-20CLASS-29'></a>
 
@@ -145,7 +151,7 @@ A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][
 
 ## 3 Layers
 
-As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input [`VOLUME`][dfd4] and produces a new output [`VOLUME`][dfd4], which is why I prefer to refer to them as transformers.
+As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOLUME`([`0`][d757] [`1`][dfd4]) and produces a new output `VOLUME`([`0`][d757] [`1`][dfd4]), which is why I prefer to refer to them as transformers.
 
 Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
 
@@ -222,6 +228,10 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
 
 - [method] **FORWARD** *(INPUT FULLY-CONNECTED) (VOL VOLUME)*
 
+<a id='x-28CL-CNN-3ABACKWARD-20-28METHOD-20NIL-20-28CL-CNN-3AFULLY-CONNECTED-29-29-29'></a>
+
+- [method] **BACKWARD** *(INPUT FULLY-CONNECTED)*
+
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [29e6]: #x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29 "Fully connected Layers"
   [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"
@@ -233,4 +243,5 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
   [85dc]: #x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29 "Layers"
   [8779]: #x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29 "(CL-CNN:BACKWARD GENERIC-FUNCTION)"
   [b1b6]: #x-28CL-CNN-3ALAYER-20CLASS-29 "(CL-CNN:LAYER CLASS)"
+  [d757]: #x-28CL-CNN-3AVOLUME-20FUNCTION-29 "(CL-CNN:VOLUME FUNCTION)"
   [dfd4]: #x-28CL-CNN-3AVOLUME-20CLASS-29 "(CL-CNN:VOLUME CLASS)"

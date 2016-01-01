@@ -46,6 +46,7 @@ vol3d.get(2,0,1) // returns 5.0
 "
 
   (volume class)
+  (volume function)
   (value (method () (volume t t t)))
   (setf-value (method () (volume t t t t)))
   (add-value (method () (volume t t t t)))
@@ -108,6 +109,7 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
 (mgl-pax:defsection @fully-connected-layer (:title "Fully connected Layers")
   (fully-connected class)
   (forward (method () (fully-connected volume)))
+  (backward (method () (fully-connected)))
   )
 
 

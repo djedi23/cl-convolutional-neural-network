@@ -25,5 +25,6 @@
    input
    layer
    fully-connected
+   relu
    ))
 

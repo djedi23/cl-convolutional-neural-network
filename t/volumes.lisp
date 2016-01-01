@@ -26,6 +26,12 @@
   (is (+ (aref (slot-value vol 'cnn::w) 0) (aref (slot-value vol 'cnn::w) 1)) 20.0 "init avec C")
   )
 
+(let ((vol (volume :sx 1 :sy 1 :depth 3 :w #(1234))))
+  (ok vol)
+  (is (array-dimension (cnn::w vol) 0) 3)
+  (is (aref (cnn::w vol) 0) 1234)
+  (is (aref (cnn::w vol) 1) 0)
+)
 
 (diag "Volume value")
 (let ((vol (make-instance 'volume :sx 2 :sy 3 :depth 4 :c 10.0)))

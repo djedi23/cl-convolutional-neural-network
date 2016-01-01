@@ -30,7 +30,7 @@ Here are some examples:
 (volume :sx 1 :sy 1 :depth 3) ; a 1x1x3 VOLUME with random numbers
  
 ;; you can also initialize with a specific list. E.g. create a 1x1x3 Vol:
-#+not-implemented(volume :initial '(1.2, 3.5, 3.6));
+(volume :sx 1 :sy 1 :depth 3 :w #(1.2 3.5 3.6))
  
 ;; the VOLUME is a wrapper around two lists: .w and .dw, which both have 
 ;; sx * sy * depth number of elements. E.g:

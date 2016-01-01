@@ -8,7 +8,7 @@
    (sy :initarg :sy :reader sy :documentation "Volume height")
    (depth :initarg :depth :reader depth :documentation "Volume depth")
    (c :initarg :c)
-   (w :reader w)
+   (w :initarg :w :reader w)
    (dw :accessor dw))
   (:documentation "VOLUME is the basic building block of all data in a NET.
   It is essentially just a 3D volume of numbers, with a
@@ -20,15 +20,19 @@
 
 
 (defmethod initialize-instance :after ((object volume) &key)
-;;  (declare (optimize (debug 3)))
+  ;;  (declare (optimize (debug 3)))
   (with-slots (sx sy depth c w dw) object
     (let ((n (* sx sy depth)))
-	  (setf w (make-array n :initial-element (if (slot-boundp object 'c) c 0)))
-	  (setf dw (make-array n :initial-element 0.0))
-    (unless (slot-boundp object 'c)
-  	  (dotimes (i n)
-	      (setf (aref w i) (random (sqrt (/ 1 n)))))
-	  ))))
+      (if (slot-boundp object 'w)
+	  (setf w (adjust-array w n))
+	  (progn
+	    (setf w (make-array n :initial-element (if (slot-boundp object 'c) c 0)))
+	    (unless (slot-boundp object 'c)
+	      (dotimes (i n)
+		(setf (aref w i) (random (sqrt (/ 1 n)))))
+	      )))
+      (setf dw (make-array n :initial-element 0.0))
+      )))
 
 (constructor volume)
 
@@ -83,7 +87,7 @@
   "Add value of V2 in V1"
   (loop for wv1 across (slot-value v1 'w)
      for wv2 across (slot-value v2 'w)
-       for i from 0 
+     for i from 0 
      do
        (setf (aref (slot-value v1 'w) i)
 	     (+ wv1 wv2)))
@@ -93,7 +97,7 @@
   "Add SCALED value of V2 in V1"
   (loop for wv1 across (slot-value v1 'w)
      for wv2 across (slot-value v2 'w)
-       for i from 0 
+     for i from 0 
      do
        (setf (aref (slot-value v1 'w) i)
 	     (+ wv1 (* scale wv2))))

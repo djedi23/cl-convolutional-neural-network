@@ -34,7 +34,18 @@
     ))
 
 (defmethod forward ((input fully-connected) (vol volume) &optional is-training)
-  (setf (in-act input) vol)
-  (setf (out-act input) vol)
-  vol)
-
+  (with-slots (in-act out-act out-depth filters biases) input
+    (setf in-act vol)
+    (let ((A (make-instance 'volume :sx 1 :sy 1 :depth out-depth :c 0.0))
+	  (Vw (w vol)))
+      (dotimes (i out-depth)
+	(let ((aa 0.0)
+	      (wi (w (aref filters i))))
+	  (dotimes (d (num-inputs input))
+	    (incf aa #i(Vw[d] * wi[d])))
+	  (incf aa (aref (w biases) i))
+	  (setf (value A 0 0 i) aa)
+	  ))
+      (setf out-act A)
+      out-act
+      )))

@@ -3,7 +3,7 @@
 (mgl-pax:defsection @main (:title "CL Convolutional Neural Networks")
   "## Installation
 
-```lisp
+```cl
 (ql:quickload :cl-cnn)
 ```
 
@@ -23,7 +23,7 @@ https://github.com/karpathy/convnetjs"
 
 Here are some examples:
 
-```lisp
+```cl
 ;; create a VOLUME of size 32x32x3, and filled with random numbers
 (volume :sx 32 :sy 32 :depth 3)
 (volume :sx 32 :sy 32 :depth 3 :c 0.0) ; same volume but init with zeros

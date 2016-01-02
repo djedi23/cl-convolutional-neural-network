@@ -3,18 +3,19 @@
 (declaim (optimize (debug 3)))
 
 (defclass softmax (layer)
-  ((in-sx :initarg :sx :reader sx :documentation "Layer width")
-   (in-sy :initarg :sy :reader sy :documentation "Layer height")
-   (in-depth :initarg :depth :reader depth :documentation "Layer depth")
-   (out-sx :accessor sx :documentation "Layer width")
-   (out-sy :accessor sy :documentation "Layer height")
-   (out-depth :accessor depth :documentation "Layer depth")
+  (;; (in-sx :initarg :sx :reader sx :documentation "Layer width")
+;;    (in-sy :initarg :sy :reader sy :documentation "Layer height")
+;;    (in-depth :initarg :depth :reader depth :documentation "Layer depth")
+;;    (out-sx :accessor sx :documentation "Layer width")
+;;    (out-sy :accessor sy :documentation "Layer height")
+;;    (out-depth :accessor depth :documentation "Layer depth")
    (num-inputs :reader num-inputs)
    (es :accessor es)
    )  
   (:documentation "Implements Softmax loss"))
+(constructor softmax)
 
-(defmethod initialize-instance :after ((object softmax) &key)
+(defmethod initialize ((object softmax))
   ;;  (declare (optimize (debug 3)))
   (with-slots (in-sx in-sy in-depth out-sx out-sy out-depth num-inputs) object
     (setf num-inputs (* in-sx in-sy in-depth))
@@ -22,7 +23,6 @@
     (setf out-sy 1)
     (setf out-depth num-inputs)
     ))
-(constructor softmax)
 
 (defmethod forward ((input softmax) (vol volume) &optional is-training)
   (with-slots (in-act out-act out-depth) input

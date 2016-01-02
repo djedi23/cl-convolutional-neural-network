@@ -3,25 +3,25 @@
 (declaim (optimize (debug 3)))
 
 (defclass relu (layer)
-  ((in-sx :initarg :sx :reader sx :documentation "Layer width")
-   (in-sy :initarg :sy :reader sy :documentation "Layer height")
-   (in-depth :initarg :depth :reader depth :documentation "Layer depth")
-   (out-sx :accessor sx :documentation "Layer width")
-   (out-sy :accessor sy :documentation "Layer height")
-   (out-depth :accessor depth :documentation "Layer depth")
+  (;; (in-sx :initarg :sx :reader sx :documentation "Layer width")
+;;    (in-sy :initarg :sy :reader sy :documentation "Layer height")
+;;    (in-depth :initarg :depth :reader depth :documentation "Layer depth")
+;;    (out-sx :accessor sx :documentation "Layer width")
+;;    (out-sy :accessor sy :documentation "Layer height")
+;;    (out-depth :accessor depth :documentation "Layer depth")
    )  
   (:documentation "Implements ReLU nonlinearity elementwise
 $x -> max(0, x)$
 the output is in [0, inf)"))
+(constructor relu)
 
-(defmethod initialize-instance :after ((object relu) &key)
+(defmethod initialize ((object relu))
   ;;  (declare (optimize (debug 3)))
   (with-slots (in-sx in-sy in-depth out-sx out-sy out-depth) object
     (setf out-sx in-sx)
     (setf out-sy in-sy)
     (setf out-depth in-depth)
     ))
-(constructor relu)
 
 (defmethod forward ((input relu) (vol volume) &optional is-training)
   (with-slots (in-act out-act out-depth filters biases) input

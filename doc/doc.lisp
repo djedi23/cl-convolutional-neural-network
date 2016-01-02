@@ -63,6 +63,7 @@ Here are some examples:
 (mgl-pax:defsection @net (:title "Networks")
   "A NET is a very simple class that simply contains a list of LAYER. When an example (in form of a VOLUME) is passed through the NET, the NET simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last LAYER. Similarly, during backpropagation the Net calls the BACKWARD function of each layer in turn to compute the gradient."
   (net class)
+  (add-layer (method () (net layer)))
   )
 
 (mgl-pax:defsection @layers (:title "Layers")
@@ -93,6 +94,7 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
  "
 
   (layer class)
+  (initialize generic-function)
   (forward generic-function)
   (backward generic-function)
   (get-params-and-grads generic-function)

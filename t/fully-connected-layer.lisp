@@ -4,7 +4,8 @@
 
 (diag "Fully connected Layer")
 
-(let ((fc (make-instance 'fully-connected :sx 1 :sy 2 :depth 3 :num-neurons 20)))
+(let ((fc (make-instance 'fully-connected :in-sx 1 :in-sy 2 :in-depth 3 :num-neurons 20)))
+  (cnn::initialize fc)
   (ok fc)
   (is (cnn::num-inputs fc) 6)
   (is (class-name (class-of (slot-value fc 'cnn::biases))) 'VOLUME)
@@ -15,7 +16,8 @@
     (isnt (aref cnn::filters 0) (aref cnn::filters 1))
     ))
 
-(let ((fc (make-instance 'fully-connected :sx 1 :sy 2 :depth 3 :num-neurons 20 :bias 3.0)))
+(let ((fc (make-instance 'fully-connected :in-sx 1 :in-sy 2 :in-depth 3 :num-neurons 20 :bias 3.0)))
+  (cnn::initialize fc)
   (ok fc)
   (is (cnn::num-inputs fc) 6)
 
@@ -24,7 +26,8 @@
   )
 
 (diag "Fully connected forward")
-(let ((fc (make-instance 'fully-connected :sx 1 :sy 2 :depth 3 :num-neurons 20 :bias 3.0)))
+(let ((fc (make-instance 'fully-connected :in-sx 1 :in-sy 2 :in-depth 3 :num-neurons 20 :bias 3.0)))
+  (cnn::initialize fc)
   (forward fc (make-instance 'volume :sx 1 :sy 2 :depth 10 :c 10.0))
   (is (cnn::depth (cnn::in-act fc)) 10)
   (is (cnn::depth (cnn::out-act fc)) 20)

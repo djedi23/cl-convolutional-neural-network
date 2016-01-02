@@ -149,6 +149,12 @@ A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][
     
     For now constraints: Simple linear order of layers, first layer input last layer a cost layer
 
+<a id='x-28CL-CNN-3AADD-LAYER-20-28METHOD-20NIL-20-28CL-CNN-3ANET-20CL-CNN-3ALAYER-29-29-29'></a>
+
+- [method] **ADD-LAYER** *(NET NET) (LAYER LAYER)*
+
+    Push a `LAYER` in the end of the `NET` 
+
 <a id='x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29'></a>
 
 ## 3 Layers
@@ -183,6 +189,12 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
 <a id='x-28CL-CNN-3ALAYER-20CLASS-29'></a>
 
 - [class] **LAYER**
+
+<a id='x-28CL-CNN-3AINITIALIZE-20GENERIC-FUNCTION-29'></a>
+
+- [generic-function] **INITIALIZE** *LAYER*
+
+    post initialize the layer
 
 <a id='x-28CL-CNN-3AFORWARD-20GENERIC-FUNCTION-29'></a>
 

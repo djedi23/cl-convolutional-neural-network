@@ -13,12 +13,12 @@
   :license ""
   :depends-on (:infix)
   :components ((:module "src"
+			:serial t
 			:components
-			((:file "utils" :depends-on ("package"))
+			((:file "package")
+			 (:file "utils" :depends-on ("package"))
 			 (:file "volumes" :depends-on ("utils"))
-			 (:file "net" :depends-on ("utils"))
 			 (:file "cl-cnn")
-			 (:file "package")
 			 (:module "layers"
 				  :components
 				  ((:file "layer")
@@ -27,6 +27,7 @@
 				   (:file "relu" :depends-on ("layer"))
 				   (:file "softmax" :depends-on ("layer"))
 				   ))
+			 (:file "net" :depends-on ("utils"))
 			 )))
   :description ""
   :long-description

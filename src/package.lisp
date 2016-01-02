@@ -17,6 +17,7 @@
    set-const
 
    net
+   add-layer
 
    forward
    backward
@@ -26,5 +27,6 @@
    layer
    fully-connected
    relu
+   softmax
    ))
 

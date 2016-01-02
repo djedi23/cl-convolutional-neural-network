@@ -3,15 +3,8 @@
 (declaim (optimize (debug 3)))
 
 (defclass softmax (layer)
-  (;; (in-sx :initarg :sx :reader sx :documentation "Layer width")
-;;    (in-sy :initarg :sy :reader sy :documentation "Layer height")
-;;    (in-depth :initarg :depth :reader depth :documentation "Layer depth")
-;;    (out-sx :accessor sx :documentation "Layer width")
-;;    (out-sy :accessor sy :documentation "Layer height")
-;;    (out-depth :accessor depth :documentation "Layer depth")
-   (num-inputs :reader num-inputs)
-   (es :accessor es)
-   )  
+  ((num-inputs :reader num-inputs)
+   (es :accessor es))  
   (:documentation "Implements Softmax loss"))
 (constructor softmax)
 

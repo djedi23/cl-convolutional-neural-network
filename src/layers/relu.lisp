@@ -3,13 +3,7 @@
 (declaim (optimize (debug 3)))
 
 (defclass relu (layer)
-  (;; (in-sx :initarg :sx :reader sx :documentation "Layer width")
-;;    (in-sy :initarg :sy :reader sy :documentation "Layer height")
-;;    (in-depth :initarg :depth :reader depth :documentation "Layer depth")
-;;    (out-sx :accessor sx :documentation "Layer width")
-;;    (out-sy :accessor sy :documentation "Layer height")
-;;    (out-depth :accessor depth :documentation "Layer depth")
-   )  
+  ()  
   (:documentation "Implements ReLU nonlinearity elementwise
 $x -> max(0, x)$
 the output is in [0, inf)"))

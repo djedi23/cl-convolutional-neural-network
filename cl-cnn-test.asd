@@ -19,6 +19,7 @@ This file is a part of cl-cnn project.
  			 (:test-file "net")
 			 (:test-file "input-layer")
 			 (:test-file "fully-connected-layer")
+			 (:test-file "relu")
 			 )))
   :description "Test system for cl-cnn"
 

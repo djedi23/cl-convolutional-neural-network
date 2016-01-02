@@ -10,7 +10,9 @@
    (out-sy :accessor sy :documentation "Layer height")
    (out-depth :accessor depth :documentation "Layer depth")
    )  
- (:documentation "Input Layer"))
+ (:documentation "Implements ReLU nonlinearity elementwise
+$x -> max(0, x)$
+the output is in [0, inf)"))
 
 (defmethod initialize-instance :after ((object relu) &key)
 ;;  (declare (optimize (debug 3)))

@@ -99,6 +99,7 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
   
   (@input-layer mgl-pax:section)
   (@fully-connected-layer mgl-pax:section)
+  (@loss-layers mgl-pax:section)
   )
 
 (mgl-pax:defsection @input-layer (:title "Input Layers")
@@ -113,7 +114,24 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
   (backward (method () (fully-connected)))
   )
 
+(mgl-pax:defsection @loss-layers (:title "Loss Layers")
+" Layers that implement a loss. Currently these are the layers that 
+ can initiate a BACKWARD pass. In future we probably want a more 
+ flexible system that can accomodate multiple losses to do multi-task
+ learning, and stuff like that. But for now, one of the layers in this
+ file must be the final layer in a Net."
 
+  (@softmax-layer mgl-pax:section)
+)
+
+(mgl-pax:defsection @softmax-layer (:title "Softmax Layers")
+"This is a classifier, with N discrete classes from 0 to N-1
+it gets a stream of N incoming numbers and computes the softmax
+function (exponentiate and normalize to sum to 1 as probabilities should)"
+  (softmax class)
+  (forward (method () (softmax volume)))
+  (backward (method () (softmax)))
+)
 
 (defun make-readme.md ()
   (with-open-file (s (asdf:system-relative-pathname :cl-cnn "README.md")
@@ -124,6 +142,8 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
 
 (defun update-wiki ()
   (let ((sections (list
+		   @softmax-layer
+		   @loss-layers
 		   @fully-connected-layer
 		   @input-layer
 		   @layers

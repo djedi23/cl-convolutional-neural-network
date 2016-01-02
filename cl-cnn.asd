@@ -25,6 +25,7 @@
 				   (:file "input" :depends-on ("layer"))
 				   (:file "fully-connected" :depends-on ("layer"))
 				   (:file "relu" :depends-on ("layer"))
+				   (:file "softmax" :depends-on ("layer"))
 				   ))
 			 )))
   :description ""

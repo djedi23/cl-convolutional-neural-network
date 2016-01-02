@@ -51,7 +51,7 @@
       out-act
       )))
 
-(defmethod backward ((input fully-connected))
+(defmethod backward ((input fully-connected) &optional index)
   (with-slots (in-act out-act out-depth filters biases) input
     (let* ((V in-act))
       (setf (dw V) (make-array (array-dimension (w V) 0) :initial-element 0.0))

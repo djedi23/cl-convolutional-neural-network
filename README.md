@@ -9,6 +9,8 @@
 - [3 Layers][85dc]
     - [3.1 Input Layers][42a3]
     - [3.2 Fully connected Layers][29e6]
+    - [3.3 Loss Layers][a784]
+        - [3.3.1 Softmax Layers][339e]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -151,7 +153,7 @@ A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][
 
 ## 3 Layers
 
-As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('SOFTMAX' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOLUME`([`0`][d757] [`1`][dfd4]) and produces a new output `VOLUME`([`0`][d757] [`1`][dfd4]), which is why I prefer to refer to them as transformers.
+As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('[`SOFTMAX`][8fc5]' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOLUME`([`0`][d757] [`1`][dfd4]) and produces a new output `VOLUME`([`0`][d757] [`1`][dfd4]), which is why I prefer to refer to them as transformers.
 
 Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
 
@@ -190,7 +192,7 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
 
 <a id='x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29'></a>
 
-- [generic-function] **BACKWARD** *LAYER-OR-NET*
+- [generic-function] **BACKWARD** *LAYER-OR-NET &OPTIONAL INDEX*
 
     Backpropagation
 
@@ -238,9 +240,42 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
 
 - [method] **BACKWARD** *(INPUT FULLY-CONNECTED)*
 
+<a id='x-28CL-CNN-3A-40LOSS-LAYERS-20MGL-PAX-3ASECTION-29'></a>
+
+### 3.3 Loss Layers
+
+ Layers that implement a loss. Currently these are the layers that 
+can initiate a [`BACKWARD`][8779] pass. In future we probably want a more 
+flexible system that can accomodate multiple losses to do multi-task
+learning, and stuff like that. But for now, one of the layers in this
+file must be the final layer in a Net.
+
+<a id='x-28CL-CNN-3A-40SOFTMAX-LAYER-20MGL-PAX-3ASECTION-29'></a>
+
+#### 3.3.1 Softmax Layers
+
+This is a classifier, with N discrete classes from 0 to N-1
+it gets a stream of N incoming numbers and computes the softmax
+function (exponentiate and normalize to sum to 1 as probabilities should)
+
+<a id='x-28CL-CNN-3ASOFTMAX-20CLASS-29'></a>
+
+- [class] **SOFTMAX** *[LAYER][b1b6]*
+
+    Implements Softmax loss
+
+<a id='x-28CL-CNN-3AFORWARD-20-28METHOD-20NIL-20-28CL-CNN-3ASOFTMAX-20CL-CNN-3AVOLUME-29-29-29'></a>
+
+- [method] **FORWARD** *(INPUT SOFTMAX) (VOL VOLUME)*
+
+<a id='x-28CL-CNN-3ABACKWARD-20-28METHOD-20NIL-20-28CL-CNN-3ASOFTMAX-29-29-29'></a>
+
+- [method] **BACKWARD** *(INPUT SOFTMAX)*
+
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [29e6]: #x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29 "Fully connected Layers"
   [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"
+  [339e]: #x-28CL-CNN-3A-40SOFTMAX-LAYER-20MGL-PAX-3ASECTION-29 "Softmax Layers"
   [3b14]: #x-28CL-CNN-3A-40NET-20MGL-PAX-3ASECTION-29 "Networks"
   [42a3]: #x-28CL-CNN-3A-40INPUT-LAYER-20MGL-PAX-3ASECTION-29 "Input Layers"
   [458c]: #x-28CL-CNN-3A-40VOLUMES-20MGL-PAX-3ASECTION-29 "Volumes"
@@ -249,6 +284,8 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
   [674e]: #x-28CL-CNN-3AGRAD-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:GRAD (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [85dc]: #x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29 "Layers"
   [8779]: #x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29 "(CL-CNN:BACKWARD GENERIC-FUNCTION)"
+  [8fc5]: #x-28CL-CNN-3ASOFTMAX-20CLASS-29 "(CL-CNN:SOFTMAX CLASS)"
+  [a784]: #x-28CL-CNN-3A-40LOSS-LAYERS-20MGL-PAX-3ASECTION-29 "Loss Layers"
   [b1b6]: #x-28CL-CNN-3ALAYER-20CLASS-29 "(CL-CNN:LAYER CLASS)"
   [d757]: #x-28CL-CNN-3AVOLUME-20FUNCTION-29 "(CL-CNN:VOLUME FUNCTION)"
   [dfd4]: #x-28CL-CNN-3AVOLUME-20CLASS-29 "(CL-CNN:VOLUME CLASS)"

@@ -18,8 +18,7 @@
   the data. C is optionally a value to initialize the VOLUME
   with. If C is missing, fills the VOLUME with random numbers."))
 
-
-(defmethod initialize-instance :after ((object volume) &key)
+(constructor volume object
   ;;  (declare (optimize (debug 3)))
   (with-slots (sx sy depth c w dw) object
     (let ((n (* sx sy depth)))
@@ -33,8 +32,6 @@
 	      )))
       (setf dw (make-array n :initial-element 0.0))
       )))
-
-(constructor volume)
 (defmethod print-object ((o volume) stream)
   (format stream "#<VOLUME ~a>" (w o)))
 

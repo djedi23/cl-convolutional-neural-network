@@ -9,10 +9,6 @@
 For now constraints: Simple linear order of layers, first layer input last layer a cost layer"))
 (constructor net)
 
-(defmethod make-layers ((net net) defs)
-
-  )
-
 (defmethod add-layer ((net net) (layer layer))
   "Push a LAYER in the end of the NET "
   (when (> (fill-pointer (layers net)) 0)

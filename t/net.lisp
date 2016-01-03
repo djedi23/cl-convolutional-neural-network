@@ -41,7 +41,7 @@
   (add-layer net (svm))
   (add-layer net (fully-connected :num-classes 2))
 
-  (is (fill-pointer (cnn::layers net)) 4)
+  (is (fill-pointer (cnn::layers net)) 3)
   (is (class-name (class-of (aref (cnn::layers net) 1))) 'SVM)
   (with-slots (cnn::in-sx cnn::in-sy cnn::in-depth
 			  cnn::out-sx cnn::out-sy cnn::out-depth) (aref (cnn::layers net) 1)
@@ -54,7 +54,7 @@
     )
 
   (let ((f (forward net (volume :sx 1 :sy 1 :depth 2 :w #(0.5 -1.3)))))
-    (ok (< (abs (- (aref (cnn::w f) 0) 0.1)) 0.8) (format nil "Error ~a < 0.8" (abs (- (aref (cnn::w f) 0) 0.1))))
+    (ok (< (abs (- (aref (cnn::w f) 0) 0.1)) 1) (format nil "Error ~a < 1" (abs (- (aref (cnn::w f) 0) 0.1))))
     ))
 
 

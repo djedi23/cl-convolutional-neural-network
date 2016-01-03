@@ -28,5 +28,6 @@
    fully-connected
    relu
    softmax
+   svm
    ))
 

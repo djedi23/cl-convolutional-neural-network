@@ -26,6 +26,7 @@
 				   (:file "fully-connected" :depends-on ("layer"))
 				   (:file "relu" :depends-on ("layer"))
 				   (:file "softmax" :depends-on ("layer"))
+				   (:file "svm" :depends-on ("layer"))
 				   ))
 			 (:file "net" :depends-on ("utils"))
 			 )))

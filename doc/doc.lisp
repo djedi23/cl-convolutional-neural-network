@@ -126,6 +126,7 @@ console.log('score for class 0 is assigned:'  + scores.w[0]);
  file must be the final layer in a Net."
 
   (@softmax-layer mgl-pax:section)
+  (@svm-layer mgl-pax:section)
 )
 
 (mgl-pax:defsection @softmax-layer (:title "Softmax Layers")
@@ -137,6 +138,14 @@ function (exponentiate and normalize to sum to 1 as probabilities should)"
   (backward (method () (softmax)))
 )
 
+(mgl-pax:defsection @svm-layer (:title "SVM Layers")
+""
+  (svm class)
+  (forward (method () (svm volume)))
+  (backward (method () (svm)))
+)
+
+
 (defun make-readme.md ()
   (with-open-file (s (asdf:system-relative-pathname :cl-cnn "README.md")
 		     :direction :output :if-exists :supersede)
@@ -147,6 +156,7 @@ function (exponentiate and normalize to sum to 1 as probabilities should)"
 (defun update-wiki ()
   (let ((sections (list
 		   @softmax-layer
+		   @svm-layer
 		   @loss-layers
 		   @fully-connected-layer
 		   @input-layer

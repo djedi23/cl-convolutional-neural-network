@@ -4,7 +4,7 @@
 
 (defclass softmax (layer)
   ((num-inputs :reader num-inputs)
-   (es :accessor es))  
+   (es :accessor es))
   (:documentation "Implements Softmax loss"))
 (constructor softmax)
 
@@ -50,4 +50,3 @@
 	  ))
       (- (log (aref (es indicator) y)))
       )))
-

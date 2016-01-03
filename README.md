@@ -11,6 +11,7 @@
     - [3.2 Fully connected Layers][29e6]
     - [3.3 Loss Layers][a784]
         - [3.3.1 Softmax Layers][339e]
+        - [3.3.2 SVM Layers][aeeb]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -167,7 +168,7 @@ A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][
 
 ## 3 Layers
 
-As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a `LOSS` layer ('[`SOFTMAX`][8fc5]' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOLUME`([`0`][d757] [`1`][dfd4]) and produces a new output `VOLUME`([`0`][d757] [`1`][dfd4]), which is why I prefer to refer to them as transformers.
+As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a `LOSS` layer ('[`SOFTMAX`][8fc5]' or '[`SVM`][b5e0]' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOLUME`([`0`][d757] [`1`][dfd4]) and produces a new output `VOLUME`([`0`][d757] [`1`][dfd4]), which is why I prefer to refer to them as transformers.
 
 Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
 
@@ -292,6 +293,24 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
 
 - [method] **BACKWARD** *(INPUT SOFTMAX)*
 
+<a id='x-28CL-CNN-3A-40SVM-LAYER-20MGL-PAX-3ASECTION-29'></a>
+
+#### 3.3.2 SVM Layers
+
+
+
+<a id='x-28CL-CNN-3ASVM-20CLASS-29'></a>
+
+- [class] **SVM**
+
+<a id='x-28CL-CNN-3AFORWARD-20-28METHOD-20NIL-20-28CL-CNN-3ASVM-20CL-CNN-3AVOLUME-29-29-29'></a>
+
+- [method] **FORWARD** *(INPUT SVM) (VOL VOLUME)*
+
+<a id='x-28CL-CNN-3ABACKWARD-20-28METHOD-20NIL-20-28CL-CNN-3ASVM-29-29-29'></a>
+
+- [method] **BACKWARD** *(INPUT SVM)*
+
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [29e6]: #x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29 "Fully connected Layers"
   [2a65]: #x-28CL-CNN-3ANET-20CLASS-29 "(CL-CNN:NET CLASS)"
@@ -306,6 +325,8 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
   [8779]: #x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29 "(CL-CNN:BACKWARD GENERIC-FUNCTION)"
   [8fc5]: #x-28CL-CNN-3ASOFTMAX-20CLASS-29 "(CL-CNN:SOFTMAX CLASS)"
   [a784]: #x-28CL-CNN-3A-40LOSS-LAYERS-20MGL-PAX-3ASECTION-29 "Loss Layers"
+  [aeeb]: #x-28CL-CNN-3A-40SVM-LAYER-20MGL-PAX-3ASECTION-29 "SVM Layers"
   [b1b6]: #x-28CL-CNN-3ALAYER-20CLASS-29 "(CL-CNN:LAYER CLASS)"
+  [b5e0]: #x-28CL-CNN-3ASVM-20CLASS-29 "(CL-CNN:SVM CLASS)"
   [d757]: #x-28CL-CNN-3AVOLUME-20FUNCTION-29 "(CL-CNN:VOLUME FUNCTION)"
   [dfd4]: #x-28CL-CNN-3AVOLUME-20CLASS-29 "(CL-CNN:VOLUME CLASS)"

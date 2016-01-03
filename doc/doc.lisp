@@ -73,25 +73,19 @@ Here are some examples:
 
 Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
 
-```javascript
-var layer_defs = [];
-// minimal network: a simple binary SVM classifer in 2-dimensional space
-layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:2});
-layer_defs.push({type:'svm', num_classes:2});
- 
-// create a net
-var net = new convnetjs.Net();
-net.makeLayers(layer_defs);
- 
-// create a 1x1x2 volume of input activations:
-var x = new convnetjs.Vol(1,1,2);
-x.w[0] = 0.5; // w is the field holding the actual data
-x.w[1] = -1.3;
-// a shortcut for the above is var x = new convnetjs.Vol([0.5, -1.3]);
- 
-var scores = net.forward(x); // pass forward through network
-// scores is now a Vol() of output activations
-console.log('score for class 0 is assigned:'  + scores.w[0]); 
+```cl
+;; minimal network: a simple binary SVM classifer in 2-dimensional space
+(let ((net (make-instance 'net)))
+  (add-layer net (input :out-sx 1 :out-sy 1 :out-depth 2))
+  (add-layer net (svm))
+  (add-layer net (fully-connected :num-classes 2))
+
+  ;; create a 1x1x2 volume of input activations and
+  ;; pass forward through network
+  (let ((scores (forward net (volume :sx 1 :sy 1 :depth 2 :w #(0.5 -1.3)))))
+    ;; scores is now a VOLUME of output activations
+    (format t \"score for class 0 is assigned: ~a~%\"  (aref (cnn::w scores) 0))
+    ))
 ```
  "
 

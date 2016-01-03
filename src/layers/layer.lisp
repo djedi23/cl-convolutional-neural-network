@@ -11,7 +11,7 @@
    (in-depth :initarg :in-depth :accessor in-depth :documentation "Layer depth")
    (out-sx :initarg :out-sx :initform 1 :accessor out-sx :documentation "Layer width")
    (out-sy :initarg :out-sy :initform 1 :accessor out-sy :documentation "Layer height")
-   (out-depth :initarg :out-depth :initarg :num-neurons :accessor out-depth :documentation "Number of neurons")
+   (out-depth :initarg :out-depth :initarg :num-neurons :initarg :num-classes :accessor out-depth :documentation "Number of neurons")
    ))
 
 (defgeneric initialize (layer)

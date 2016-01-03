@@ -29,6 +29,7 @@
 				   (:file "svm" :depends-on ("layer"))
 				   ))
 			 (:file "net" :depends-on ("utils"))
+			 (:file "net-definition" :depends-on ("net"))
 			 )))
   :description ""
   :long-description

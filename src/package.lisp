@@ -18,7 +18,8 @@
 
    net
    add-layer
-
+   define-net
+   
    forward
    backward
    get-params-and-grads

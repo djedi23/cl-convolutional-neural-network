@@ -30,5 +30,12 @@ For now constraints: Simple linear order of layers, first layer input last layer
     (loop for i from 1 below (fill-pointer (layers net))
        do
 	 (setf act (forward (aref (layers net) i) act is-training)))
-    act
-  ))
+    act))
+
+(defmethod backward ((net net) &optional index)
+  (let* ((n (- (fill-pointer (layers net)) 1))
+	 (loss (backward (aref (layers net) n) index)))
+    (loop for i from (- n 1) downto 0
+       do
+	 (backward (aref (layers net) i) index))
+    loss))

@@ -65,6 +65,7 @@ Here are some examples:
   (net class)
   (add-layer (method () (net layer)))
   (forward (method () (net volume)))
+  (backward (method () (net)))
   )
 
 (mgl-pax:defsection @layers (:title "Layers")

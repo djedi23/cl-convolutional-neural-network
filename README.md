@@ -159,11 +159,15 @@ A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][
 
 - [method] **FORWARD** *(NET NET) (VOL VOLUME)*
 
+<a id='x-28CL-CNN-3ABACKWARD-20-28METHOD-20NIL-20-28CL-CNN-3ANET-29-29-29'></a>
+
+- [method] **BACKWARD** *(NET NET)*
+
 <a id='x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29'></a>
 
 ## 3 Layers
 
-As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a LOSS layer ('[`SOFTMAX`][8fc5]' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOLUME`([`0`][d757] [`1`][dfd4]) and produces a new output `VOLUME`([`0`][d757] [`1`][dfd4]), which is why I prefer to refer to them as transformers.
+As mentioned, every Network ([`NET`][2a65]) is just a linear list of layers. Your first layer must be '[`INPUT`][65ae]' (in which you declare sizes of your input), your last layer must be a `LOSS` layer ('[`SOFTMAX`][8fc5]' or 'SVM' for classification, or 'REGRESSION' for regression). Every layer takes an input `VOLUME`([`0`][d757] [`1`][dfd4]) and produces a new output `VOLUME`([`0`][d757] [`1`][dfd4]), which is why I prefer to refer to them as transformers.
 
 Before going into details of the types of available layers, lets look at an example at this point that ties these concepts together in a concrete form:
 

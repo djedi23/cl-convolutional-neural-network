@@ -24,3 +24,11 @@ For now constraints: Simple linear order of layers, first layer input last layer
   (initialize layer)
   (vector-push-extend layer (layers net))
   net)
+
+(defmethod forward ((net net) (vol volume) &optional is-training)
+  (let ((act (forward (aref (layers net) 0) vol is-training)))
+    (loop for i from 1 below (fill-pointer (layers net))
+       do
+	 (setf act (forward (aref (layers net) i) act is-training)))
+    act
+  ))

@@ -64,6 +64,7 @@ Here are some examples:
   "A NET is a very simple class that simply contains a list of LAYER. When an example (in form of a VOLUME) is passed through the NET, the NET simply iterates through all of its layers and propagates the example through each one in turn, and returns the result of the last LAYER. Similarly, during backpropagation the Net calls the BACKWARD function of each layer in turn to compute the gradient."
   (net class)
   (add-layer (method () (net layer)))
+  (forward (method () (net volume)))
   )
 
 (mgl-pax:defsection @layers (:title "Layers")

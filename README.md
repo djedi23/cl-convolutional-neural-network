@@ -155,6 +155,10 @@ A [`NET`][2a65] is a very simple class that simply contains a list of [`LAYER`][
 
     Push a `LAYER` in the end of the `NET` 
 
+<a id='x-28CL-CNN-3AFORWARD-20-28METHOD-20NIL-20-28CL-CNN-3ANET-20CL-CNN-3AVOLUME-29-29-29'></a>
+
+- [method] **FORWARD** *(NET NET) (VOL VOLUME)*
+
 <a id='x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29'></a>
 
 ## 3 Layers

@@ -12,8 +12,9 @@
   (add-layer net (fully-connected :num-neurons 20))
   (add-layer net (relu))
   (add-layer net (softmax))
+  (add-layer net (fully-connected :num-neurons 10))
 
-  (is (fill-pointer (cnn::layers net)) 4)
+  (is (fill-pointer (cnn::layers net)) 5)
   (is (class-name (class-of (aref (cnn::layers net) 1))) 'FULLY-CONNECTED)
   (with-slots (cnn::in-sx cnn::in-sy cnn::in-depth
 			  cnn::out-sx cnn::out-sy cnn::out-depth) (aref (cnn::layers net) 1)
@@ -24,7 +25,9 @@
     (is cnn::out-sy 1)
     (is cnn::out-depth 20)
     )
-  net
-  )
+
+  (let ((f (forward net (volume :sx 1 :sy 1 :depth 2 :w #(0.3 -0.5)))))
+    (ok (< (abs (- (aref (cnn::w f) 0) 0.1)) 0.05) (format nil "Error ~a < 0.05" (abs (- (aref (cnn::w f) 0) 0.1))))
+    ))
 
 (finalize)

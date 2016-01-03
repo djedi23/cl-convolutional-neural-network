@@ -35,7 +35,8 @@
       )))
 
 (constructor volume)
-
+(defmethod print-object ((o volume) stream)
+  (format stream "#<VOLUME ~a>" (w o)))
 
 
 (defun index-of (volume x y d)

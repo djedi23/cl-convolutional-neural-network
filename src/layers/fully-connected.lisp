@@ -22,14 +22,14 @@
     (loop for filter across filters
        for i from 0
        do
-	 (setf (aref filters i) (make-instance 'volume :sx 1 :sy 1 :depth num-inputs)))
-    (setf biases (make-instance 'volume :sx 1 :sy 1 :depth out-depth :c bias))
+	 (setf (aref filters i) (volume :sx 1 :sy 1 :depth num-inputs)))
+    (setf biases (volume :sx 1 :sy 1 :depth out-depth :c bias))
     ))
 
 (defmethod forward ((input fully-connected) (vol volume) &optional is-training)
   (with-slots (in-act out-act out-depth filters biases) input
     (setf in-act vol)
-    (let ((A (make-instance 'volume :sx 1 :sy 1 :depth out-depth :c 0.0))
+    (let ((A (volume :sx 1 :sy 1 :depth out-depth :c 0.0))
 	  (Vw (w vol)))
       (dotimes (i out-depth)
 	(let ((aa 0.0)

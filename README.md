@@ -242,7 +242,8 @@ A dummy [`LAYER`][b1b6] that essentially declares the size of input `VOLUME`([`0
 ### 3.2 Fully connected Layers
 
 Arguably the most important [`LAYER`][b1b6] and building block of everything interesting. Declares a layer of neurons that perform weighted addition of all inputs (activations on layer below) and pass them through a nonlinearity. `RELU` is the best activation to use if you know nothing about these networks. However, you have to be careful with keeping learning rates small because ReLU units can permanently die if a large gradient pushes them off your data manifold. In pratice, you may want to chain a few of these depending on how deep you want your deep learning to be ;) A good rule of thumb is you want just a few - maybe 1-3, unless you have really large datasets.
-`cl
+
+```cl
 ;; create layer of 10 linear neurons (no activation function by default)
 (fully-connected :num-neurons 10)
 ;; create layer of 10 neurons that use sigmoid activation function
@@ -259,7 +260,8 @@ Arguably the most important [`LAYER`][b1b6] and building block of everything int
 (fully-connected :num-neurons 12, group-size: 4 :activation 'maxout)
 ;; dropout half the units (probability 0.5) in this layer during training, for regularization
 (fully-connected :num-neurons 10 :activation 'relu', drop-prob: 0.5)
-`
+```
+
 
 <a id='x-28CL-CNN-3AFULLY-CONNECTED-20FUNCTION-29'></a>
 
@@ -286,10 +288,12 @@ Arguably the most important [`LAYER`][b1b6] and building block of everything int
 ### 3.3 Loss Layers
 
 Use these if you are interested in predicting a set of discrete classes for your data. In [`SOFTMAX`][8fc5], the outputs are probabilities that sum to 1. An [`SVM`][b5e0] is trained to only output scores, not probabilities. SVMs also use a bit better loss function that is more robust (a hinge loss), but its best to experiment a bit.
-`cl
+
+```cl
 (softmax :num-classes 2)
 (svm :num-classes 2)
-`
+```
+
 When you are training a classifier [`LAYER`][b1b6], your classes must be numbers that begin at 0. For a binary problem, these would be class 0 and class 1. For K classes, the classes are 0..K-1.
 
 Layers that implement a loss. Currently these are the layers that 

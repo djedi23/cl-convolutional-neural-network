@@ -101,11 +101,40 @@ Before going into details of the types of available layers, lets look at an exam
   )
 
 (mgl-pax:defsection @input-layer (:title "Input Layers")
+  "A dummy LAYER that essentially declares the size of input VOLUME and must be first layer in the network. Inputs other than real-valued numbers are currently not supported.
+```cl
+(input :out-sx 1 :out-sy 1 :out-depth 20) ;; declares 20-dimensional input points
+(input :out-sx 24 :out-sy 24 :out-depth 3) ;; input is 24x24 RGB image
+```
+"
   (input class)
   (forward (method () (input volume)))
   )
 
 (mgl-pax:defsection @fully-connected-layer (:title "Fully connected Layers")
+"
+Arguably the most important LAYER and building block of everything interesting. Declares a layer of neurons that perform weighted addition of all inputs (activations on layer below) and pass them through a nonlinearity. RELU is the best activation to use if you know nothing about these networks. However, you have to be careful with keeping learning rates small because ReLU units can permanently die if a large gradient pushes them off your data manifold. In pratice, you may want to chain a few of these depending on how deep you want your deep learning to be ;) A good rule of thumb is you want just a few - maybe 1-3, unless you have really large datasets.
+```cl
+;; create layer of 10 linear neurons (no activation function by default)
+(fully-connected :num-neurons 10)
+;; create layer of 10 neurons that use sigmoid activation function
+(fully-connected :num-neurons 10 :activation 'sigmoid) ;; x->1/(1+e^(-x))
+(fully-connected :num-neurons 10 :activation 'tanh) ;; x->tanh(x)
+(fully-connected :num-neurons 10 :activation 'relu) ;; rectified linear units: x->max(0,x)
+;; maxout units: (x,y)->max(x,y). num-neurons must be divisible by 2.
+;; maxout \"consumes\" multiple filters for every output. Thus, this line
+;; will actually produce only 5 outputs in this layer. (group-size is 2)
+;; by default.
+(fully-connected :num-neurons 10 :activation 'maxout) 
+;; specify group size in maxout. num-neurons must be divisible by group-size.
+;; here, output will be 3 neurons only (3 = 12/4)
+(fully-connected :num-neurons 12, group-size: 4 :activation 'maxout)
+;; dropout half the units (probability 0.5) in this layer during training, for regularization
+(fully-connected :num-neurons 10 :activation 'relu', drop-prob: 0.5)
+```
+"
+
+
   (fully-connected function)
   (fully-connected class)
   (forward (method () (fully-connected volume)))
@@ -113,11 +142,19 @@ Before going into details of the types of available layers, lets look at an exam
   )
 
 (mgl-pax:defsection @loss-layers (:title "Loss Layers")
-" Layers that implement a loss. Currently these are the layers that 
+"
+Use these if you are interested in predicting a set of discrete classes for your data. In SOFTMAX, the outputs are probabilities that sum to 1. An SVM is trained to only output scores, not probabilities. SVMs also use a bit better loss function that is more robust (a hinge loss), but its best to experiment a bit.
+```cl
+(softmax :num-classes 2)
+(svm :num-classes 2)
+```
+When you are training a classifier LAYER, your classes must be numbers that begin at 0. For a binary problem, these would be class 0 and class 1. For K classes, the classes are 0..K-1.
+
+Layers that implement a loss. Currently these are the layers that 
  can initiate a BACKWARD pass. In future we probably want a more 
  flexible system that can accomodate multiple losses to do multi-task
  learning, and stuff like that. But for now, one of the layers in this
- file must be the final layer in a Net."
+ file must be the final LAYER in a NET."
 
   (@softmax-layer mgl-pax:section)
   (@svm-layer mgl-pax:section)

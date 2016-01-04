@@ -98,6 +98,7 @@ Before going into details of the types of available layers, lets look at an exam
   (@input-layer mgl-pax:section)
   (@fully-connected-layer mgl-pax:section)
   (@loss-layers mgl-pax:section)
+  (@dropout-layers mgl-pax:section)
   )
 
 (mgl-pax:defsection @input-layer (:title "Input Layers")
@@ -179,6 +180,9 @@ function (exponentiate and normalize to sum to 1 as probabilities should)"
   (backward (method () (svm)))
 )
 
+(mgl-pax:defsection @dropout-layer (:title "Dropout Layer")
+  (dropout class)
+)
 
 (defun make-readme.md ()
   (with-open-file (s (asdf:system-relative-pathname :cl-cnn "README.md")
@@ -189,6 +193,7 @@ function (exponentiate and normalize to sum to 1 as probabilities should)"
 
 (defun update-wiki ()
   (let ((sections (list
+		   @dropout-layer
 		   @softmax-layer
 		   @svm-layer
 		   @loss-layers

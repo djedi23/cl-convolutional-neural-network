@@ -12,6 +12,7 @@
     - [3.3 Loss Layers][a784]
         - [3.3.1 Softmax Layers][339e]
         - [3.3.2 SVM Layers][aeeb]
+    - [3.4 Dropout Layer][9d73]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -314,7 +315,7 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
 
 <a id='x-28CL-CNN-3ASOFTMAX-20CLASS-29'></a>
 
-- [class] **SOFTMAX** *[LAYER][b1b6]*
+- [class] **SOFTMAX** *LOSS [LAYER][b1b6]*
 
     Implements Softmax loss
 
@@ -334,7 +335,7 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
 
 <a id='x-28CL-CNN-3ASVM-20CLASS-29'></a>
 
-- [class] **SVM** *[LAYER][b1b6]*
+- [class] **SVM** *LOSS [LAYER][b1b6]*
 
 <a id='x-28CL-CNN-3AFORWARD-20-28METHOD-20NIL-20-28CL-CNN-3ASVM-20CL-CNN-3AVOLUME-29-29-29'></a>
 
@@ -343,6 +344,22 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
 <a id='x-28CL-CNN-3ABACKWARD-20-28METHOD-20NIL-20-28CL-CNN-3ASVM-29-29-29'></a>
 
 - [method] **BACKWARD** *(INPUT SVM)*
+
+<a id='x-28CL-CNN-3A-40DROPOUT-LAYERS-20MGL-PAX-3ASECTION-29'></a>
+
+### 3.4 Dropout Layer
+
+<a id='x-28CL-CNN-3ADROPOUT-20CLASS-29'></a>
+
+- [class] **DROPOUT** *[LAYER][b1b6]*
+
+    An inefficient dropout layer
+    
+    Note this is not most efficient implementation since the layer before
+    computed all these activations and now we're just going to drop them :(
+    same goes for backward pass. Also, if we wanted to be efficient at test time
+    we could equivalently be clever and upscale during train and copy pointers during test
+    todo: make more efficient.
 
   [1d3d]: #x-28CL-CNN-3AVALUE-20-28METHOD-20NIL-20-28CL-CNN-3AVOLUME-20T-20T-20T-29-29-29 "(CL-CNN:VALUE (METHOD NIL (CL-CNN:VOLUME T T T)))"
   [29e6]: #x-28CL-CNN-3A-40FULLY-CONNECTED-LAYER-20MGL-PAX-3ASECTION-29 "Fully connected Layers"
@@ -357,6 +374,7 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
   [85dc]: #x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29 "Layers"
   [8779]: #x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29 "(CL-CNN:BACKWARD GENERIC-FUNCTION)"
   [8fc5]: #x-28CL-CNN-3ASOFTMAX-20CLASS-29 "(CL-CNN:SOFTMAX CLASS)"
+  [9d73]: #x-28CL-CNN-3A-40DROPOUT-LAYERS-20MGL-PAX-3ASECTION-29 "Dropout Layer"
   [a784]: #x-28CL-CNN-3A-40LOSS-LAYERS-20MGL-PAX-3ASECTION-29 "Loss Layers"
   [aeeb]: #x-28CL-CNN-3A-40SVM-LAYER-20MGL-PAX-3ASECTION-29 "SVM Layers"
   [b1b6]: #x-28CL-CNN-3ALAYER-20CLASS-29 "(CL-CNN:LAYER CLASS)"

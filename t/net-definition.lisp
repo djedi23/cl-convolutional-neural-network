@@ -15,4 +15,11 @@
 (is (fill-pointer (cnn::layers example)) 3)
 )
 
+#-disabled(print (macroexpand
+ '(cnn::define-net ()
+  (input :out-sx 1 :out-sy 1 :out-depth 2)
+  (fully-connected :num-neurons 4 :activation (relu :a 4))
+  )))
+
+
 (finalize)

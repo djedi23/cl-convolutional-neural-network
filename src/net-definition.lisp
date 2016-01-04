@@ -11,7 +11,28 @@
 (defmethod parse-layer-definition ((net symbol) (layer (eql 'svm)) def)
  (destructuring-bind (layer-name &key num-classes  &allow-other-keys) def
   `((add-layer ,net ,def)
-    (add-layer ,net (fully-connected ,@(when num-classes `(:num-classes ,num-classes)))))))
+    (add-layer ,net (fully-connected ,@(when num-classes `(:num-neurons ,num-classes)))))))
+
+(defmethod parse-layer-definition ((net symbol) (layer (eql 'softmax)) def)
+ (destructuring-bind (layer-name &key num-classes  &allow-other-keys) def
+  `((add-layer ,net ,def)
+    (add-layer ,net (fully-connected ,@(when num-classes `(:num-neurons ,num-classes)))))))
+
+#+to-be-implemented
+(defmethod parse-layer-definition ((net symbol) (layer (eql 'regression)) def)
+ (destructuring-bind (layer-name &key num-neurons  &allow-other-keys) def
+  `((add-layer ,net ,def)
+    (add-layer ,net (fully-connected ,@(when num-classes `(:num-neurons ,num-neurons)))))))
+
+
+(defmethod parse-layer-definition ((net symbol) (layer (eql 'fully-connected)) def)
+ (destructuring-bind (layer-name &key activation &allow-other-keys) def
+  `((add-layer ,net ,def)
+    ,(when activation
+        `(add-layer ,net ,(if (listp activation) activation `(,activation))  )))))
+
+
+;; TODO ajouter le dropout
 
 (defun parse-net-definitions (net defs)
   (flatten0 `(,@(mapcar #'(lambda (def)

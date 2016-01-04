@@ -28,6 +28,7 @@
 				   (:file "fully-connected" :depends-on ("layer"))
 				   (:file "convolutional" :depends-on ("layer"))
 				   (:file "relu" :depends-on ("activation"))
+				   (:file "sigmoid" :depends-on ("activation"))
 				   (:file "softmax" :depends-on ("loss"))
 				   (:file "svm" :depends-on ("loss"))
 				   (:file "dropout" :depends-on ("layer"))

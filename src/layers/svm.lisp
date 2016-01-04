@@ -2,7 +2,7 @@
 
 (declaim (optimize (debug 3)))
 
-(defclass svm (layer)
+(defclass svm (loss layer)
   ((num-inputs :reader num-inputs))
   )
 (constructor svm)

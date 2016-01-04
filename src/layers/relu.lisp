@@ -2,8 +2,8 @@
 
 (declaim (optimize (debug 3)))
 
-(defclass relu (layer)
-  ()  
+(defclass relu (activation layer)
+  ()
   (:documentation "Implements ReLU nonlinearity elementwise
 $x -> max(0, x)$
 the output is in [0, inf)"))

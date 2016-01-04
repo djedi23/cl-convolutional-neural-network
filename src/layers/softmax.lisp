@@ -2,7 +2,7 @@
 
 (declaim (optimize (debug 3)))
 
-(defclass softmax (layer)
+(defclass softmax (loss layer)
   ((num-inputs :reader num-inputs)
    (es :accessor es))
   (:documentation "Implements Softmax loss"))

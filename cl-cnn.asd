@@ -22,12 +22,14 @@
 			 (:module "layers"
 				  :components
 				  ((:file "layer")
+				   (:file "loss" :depends-on ("layer"))
+				   (:file "activation" :depends-on ("layer"))
 				   (:file "input" :depends-on ("layer"))
 				   (:file "fully-connected" :depends-on ("layer"))
 				   (:file "convolutional" :depends-on ("layer"))
-				   (:file "relu" :depends-on ("layer"))
-				   (:file "softmax" :depends-on ("layer"))
-				   (:file "svm" :depends-on ("layer"))
+				   (:file "relu" :depends-on ("activation"))
+				   (:file "softmax" :depends-on ("loss"))
+				   (:file "svm" :depends-on ("loss"))
 				   ))
 			 (:file "net" :depends-on ("utils"))
 			 (:file "net-definition" :depends-on ("net"))

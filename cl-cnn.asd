@@ -30,6 +30,7 @@
 				   (:file "relu" :depends-on ("activation"))
 				   (:file "softmax" :depends-on ("loss"))
 				   (:file "svm" :depends-on ("loss"))
+				   (:file "dropout" :depends-on ("layer"))
 				   ))
 			 (:file "net" :depends-on ("utils"))
 			 (:file "net-definition" :depends-on ("net"))

@@ -24,6 +24,7 @@
 				  ((:file "layer")
 				   (:file "input" :depends-on ("layer"))
 				   (:file "fully-connected" :depends-on ("layer"))
+				   (:file "convolutional" :depends-on ("layer"))
 				   (:file "relu" :depends-on ("layer"))
 				   (:file "softmax" :depends-on ("layer"))
 				   (:file "svm" :depends-on ("layer"))

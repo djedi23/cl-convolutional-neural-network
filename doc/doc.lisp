@@ -102,6 +102,7 @@ Before going into details of the types of available layers, lets look at an exam
 
 (mgl-pax:defsection @input-layer (:title "Input Layers")
   "A dummy LAYER that essentially declares the size of input VOLUME and must be first layer in the network. Inputs other than real-valued numbers are currently not supported.
+
 ```cl
 (input :out-sx 1 :out-sy 1 :out-depth 20) ;; declares 20-dimensional input points
 (input :out-sx 24 :out-sy 24 :out-depth 3) ;; input is 24x24 RGB image

@@ -222,10 +222,12 @@ Before going into details of the types of available layers, lets look at an exam
 ### 3.1 Input Layers
 
 A dummy [`LAYER`][b1b6] that essentially declares the size of input `VOLUME`([`0`][d757] [`1`][dfd4]) and must be first layer in the network. Inputs other than real-valued numbers are currently not supported.
-`cl
+
+```cl
 (input :out-sx 1 :out-sy 1 :out-depth 20) ;; declares 20-dimensional input points
 (input :out-sx 24 :out-sy 24 :out-depth 3) ;; input is 24x24 RGB image
-`
+```
+
 
 <a id='x-28CL-CNN-3AINPUT-20CLASS-29'></a>
 
@@ -273,7 +275,7 @@ Arguably the most important [`LAYER`][b1b6] and building block of everything int
 
 - [class] **FULLY-CONNECTED** *[LAYER][b1b6]*
 
-    Full connected Layer
+    is fully connected dot products
 
 <a id='x-28CL-CNN-3AFORWARD-20-28METHOD-20NIL-20-28CL-CNN-3AFULLY-CONNECTED-20CL-CNN-3AVOLUME-29-29-29'></a>
 

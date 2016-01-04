@@ -2,14 +2,26 @@
 
 (declaim (optimize (debug 3)))
 
-(defun parse-net-definition (net defs)
-  (mapcar #'(lambda (def)
-	      `(add-layer ,net ,def))
-	  defs))
+(defgeneric parse-definition (net def-function def))
+
+(defmethod parse-definition ((net symbol) f def)
+  `((add-layer ,net ,def)))
+
+(defmethod parse-definition ((net symbol) (f (eql 'svm)) def)
+  `((add-layer ,net ,def)
+    (add-layer ,net (fully-connected))))
+
+
+
+(defun parse-net-definitions (net defs)
+ (print (concatenate 'list (print
+	       (mapcar #'(lambda (def)
+			   (parse-definition net (car def) def))
+		       defs)))))
 
 (defmacro define-net (name &body body)
   (let ((var (gensym (symbol-name name))))
     `(let ((,var (net)))
-       ,@(parse-net-definition var body)
+       ,@(parse-net-definitions var body)
        (setq ,name ,var)
        )))

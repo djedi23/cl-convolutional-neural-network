@@ -12,7 +12,7 @@
     - [3.3 Loss Layers][a784]
         - [3.3.1 Softmax Layers][339e]
         - [3.3.2 SVM Layers][aeeb]
-    - [3.4 Dropout Layer][9d73]
+    - [3.4 Dropout Layer][a803]
 
 ###### \[in package CL-CNN\]
 ## Installation
@@ -40,15 +40,15 @@ Here are some examples:
 (volume :sx 32 :sy 32 :depth 3)
 (volume :sx 32 :sy 32 :depth 3 :c 0.0) ; same volume but init with zeros
 (volume :sx 1 :sy 1 :depth 3) ; a 1x1x3 VOLUME with random numbers
- 
+
 ;; you can also initialize with a specific list. E.g. create a 1x1x3 Vol:
 (volume :sx 1 :sy 1 :depth 3 :w #(1.2 3.5 3.6))
- 
-;; the VOLUME is a wrapper around two lists: .w and .dw, which both have 
+
+;; the VOLUME is a wrapper around two lists: .w and .dw, which both have
 ;; sx * sy * depth number of elements. E.g:
 (aref (w v) 0) ; contains 1.2
 (aref (dw v) 0) ; contains 0, because gradients are initialized with zeros
- 
+
 ;; you can also access the 3-D Vols with getters and setters
 ;; but these are subject to function call overhead
 (let ((vol3d (volume :sx 10 :sy 10 :depth 5)))
@@ -257,7 +257,7 @@ Arguably the most important [`LAYER`][b1b6] and building block of everything int
 ;; maxout "consumes" multiple filters for every output. Thus, this line
 ;; will actually produce only 5 outputs in this layer. (group-size is 2)
 ;; by default.
-(fully-connected :num-neurons 10 :activation 'maxout) 
+(fully-connected :num-neurons 10 :activation 'maxout)
 ;; specify group size in maxout. num-neurons must be divisible by group-size.
 ;; here, output will be 3 neurons only (3 = 12/4)
 (fully-connected :num-neurons 12, group-size: 4 :activation 'maxout)
@@ -299,8 +299,8 @@ Use these if you are interested in predicting a set of discrete classes for your
 
 When you are training a classifier [`LAYER`][b1b6], your classes must be numbers that begin at 0. For a binary problem, these would be class 0 and class 1. For K classes, the classes are 0..K-1.
 
-Layers that implement a loss. Currently these are the layers that 
- can initiate a [`BACKWARD`][8779] pass. In future we probably want a more 
+Layers that implement a loss. Currently these are the layers that
+ can initiate a [`BACKWARD`][8779] pass. In future we probably want a more
  flexible system that can accomodate multiple losses to do multi-task
  learning, and stuff like that. But for now, one of the layers in this
  file must be the final [`LAYER`][b1b6] in a [`NET`][2a65].
@@ -345,7 +345,7 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
 
 - [method] **BACKWARD** *(INPUT SVM)*
 
-<a id='x-28CL-CNN-3A-40DROPOUT-LAYERS-20MGL-PAX-3ASECTION-29'></a>
+<a id='x-28CL-CNN-3A-40DROPOUT-LAYER-20MGL-PAX-3ASECTION-29'></a>
 
 ### 3.4 Dropout Layer
 
@@ -374,8 +374,8 @@ function (exponentiate and normalize to sum to 1 as probabilities should)
   [85dc]: #x-28CL-CNN-3A-40LAYERS-20MGL-PAX-3ASECTION-29 "Layers"
   [8779]: #x-28CL-CNN-3ABACKWARD-20GENERIC-FUNCTION-29 "(CL-CNN:BACKWARD GENERIC-FUNCTION)"
   [8fc5]: #x-28CL-CNN-3ASOFTMAX-20CLASS-29 "(CL-CNN:SOFTMAX CLASS)"
-  [9d73]: #x-28CL-CNN-3A-40DROPOUT-LAYERS-20MGL-PAX-3ASECTION-29 "Dropout Layer"
   [a784]: #x-28CL-CNN-3A-40LOSS-LAYERS-20MGL-PAX-3ASECTION-29 "Loss Layers"
+  [a803]: #x-28CL-CNN-3A-40DROPOUT-LAYER-20MGL-PAX-3ASECTION-29 "Dropout Layer"
   [aeeb]: #x-28CL-CNN-3A-40SVM-LAYER-20MGL-PAX-3ASECTION-29 "SVM Layers"
   [b1b6]: #x-28CL-CNN-3ALAYER-20CLASS-29 "(CL-CNN:LAYER CLASS)"
   [b5e0]: #x-28CL-CNN-3ASVM-20CLASS-29 "(CL-CNN:SVM CLASS)"

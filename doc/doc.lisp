@@ -28,15 +28,15 @@ Here are some examples:
 (volume :sx 32 :sy 32 :depth 3)
 (volume :sx 32 :sy 32 :depth 3 :c 0.0) ; same volume but init with zeros
 (volume :sx 1 :sy 1 :depth 3) ; a 1x1x3 VOLUME with random numbers
- 
+
 ;; you can also initialize with a specific list. E.g. create a 1x1x3 Vol:
 (volume :sx 1 :sy 1 :depth 3 :w #(1.2 3.5 3.6))
- 
-;; the VOLUME is a wrapper around two lists: .w and .dw, which both have 
+
+;; the VOLUME is a wrapper around two lists: .w and .dw, which both have
 ;; sx * sy * depth number of elements. E.g:
 (aref (w v) 0) ; contains 1.2
 (aref (dw v) 0) ; contains 0, because gradients are initialized with zeros
- 
+
 ;; you can also access the 3-D Vols with getters and setters
 ;; but these are subject to function call overhead
 (let ((vol3d (volume :sx 10 :sy 10 :depth 5)))
@@ -94,11 +94,11 @@ Before going into details of the types of available layers, lets look at an exam
   (forward generic-function)
   (backward generic-function)
   (get-params-and-grads generic-function)
-  
+
   (@input-layer mgl-pax:section)
   (@fully-connected-layer mgl-pax:section)
   (@loss-layers mgl-pax:section)
-  (@dropout-layers mgl-pax:section)
+  (@dropout-layer mgl-pax:section)
   )
 
 (mgl-pax:defsection @input-layer (:title "Input Layers")
@@ -128,7 +128,7 @@ Arguably the most important LAYER and building block of everything interesting. 
 ;; maxout \"consumes\" multiple filters for every output. Thus, this line
 ;; will actually produce only 5 outputs in this layer. (group-size is 2)
 ;; by default.
-(fully-connected :num-neurons 10 :activation 'maxout) 
+(fully-connected :num-neurons 10 :activation 'maxout)
 ;; specify group size in maxout. num-neurons must be divisible by group-size.
 ;; here, output will be 3 neurons only (3 = 12/4)
 (fully-connected :num-neurons 12, group-size: 4 :activation 'maxout)
@@ -154,8 +154,8 @@ Use these if you are interested in predicting a set of discrete classes for your
 ```
 When you are training a classifier LAYER, your classes must be numbers that begin at 0. For a binary problem, these would be class 0 and class 1. For K classes, the classes are 0..K-1.
 
-Layers that implement a loss. Currently these are the layers that 
- can initiate a BACKWARD pass. In future we probably want a more 
+Layers that implement a loss. Currently these are the layers that
+ can initiate a BACKWARD pass. In future we probably want a more
  flexible system that can accomodate multiple losses to do multi-task
  learning, and stuff like that. But for now, one of the layers in this
  file must be the final LAYER in a NET."

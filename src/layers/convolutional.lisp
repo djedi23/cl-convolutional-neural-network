@@ -52,7 +52,7 @@
 	    (setf x (- pad))
 	    (dotimes (ax out-sx)
 	      (incf x xystride)
-
+	      ;; -- start convolution --
 	      (let ((aa 0.0))
 		(dotimes (fy (sy f))
 		  (let ((oy (+ y fy)))
@@ -60,9 +60,12 @@
 		      (let ((ox (+ x fx)))
 			(when (and (>= oy 0) (< oy vsy) (>= ox 0) (< ox vsx))
 			  (dotimes (fd (depth f))
-			    (incf a #i(3)) ;; -----
+			    (incf aa #i(w(f[((sx(f)*fy)+fx)*depth(f)+fd] *
+					    w(vol[((vsx * oy)+ox)*depth(vol)+fd]))))
 			    )))))))
-
+	      (incf aa (aref (w biases) d))
+	      (setf (value a ax ay d) aa)
+	      ;; -- end convolution --
 	      ))))
       (setf out-act A)
       out-act

@@ -62,25 +62,51 @@
 			  (dotimes (fd (depth f))
 			    (incf aa #i(w(f[((sx(f)*fy)+fx)*depth(f)+fd] *
 					    w(vol[((vsx * oy)+ox)*depth(vol)+fd]))))
-			    )))))))
-	      (incf aa (aref (w biases) d))
-	      (setf (value a ax ay d) aa)
+			    ))))))
+		(incf aa (aref (w biases) d))
+		(setf (value a ax ay d) aa))
 	      ;; -- end convolution --
 	      ))))
       (setf out-act A)
       out-act
       )))
 
-#+todo
+
 (defmethod backward ((input convolutional) &optional index)
-  (with-slots (in-act out-act out-depth filters biases) input
-    (let* ((V in-act))
+  (with-slots (in-act out-act out-depth pad filters biases) input
+    (let* ((V in-act)
+	   (vsx (sx vol))
+	   (vsy (sy vol))
+	   (xystride stride))
       (setf (dw V) (make-array (array-dimension (w V) 0) :initial-element 0.0))
-      (dotimes (i out-depth)
-	(let ((tfi (aref filters i))
-	      (chain_grad (aref (dw out_act) i)))
-	  (dotimes (d (num-inputs input))
-	    (incf (aref (dw V) d) (* (aref (w tfi) d) chain_grad))
-	    (incf (aref (dw tfi) d) (* (aref (w V) d) chain_grad)))
-	  (incf (aref (dw biases) i) chain_grad)
-	  )))))
+      (loop for d from 0 below out-depth
+	 for f = (aref filters d)
+	 for x = (- pad)
+	 for y = (- pad)
+	 do
+	   (loop for ay from 0 below out-sy
+	      for y = (+ y xystride)
+	      for x = (- pad)
+	      do
+		(loop for ax from 0 below out-sx
+		   for x = (+ x xystride)
+		   for chain-grad = (get-grad out-act ax ay d)
+		   do
+		   ;; ---
+		     (loop for fy from 0 below (sy f)
+			for oy = (+ y fy)
+			do
+			  (loop for fx from 0 below (sx f)
+			     for ox = (+ x fx)
+			     when (and (>= oy 0) (< oy vsy) (>= ox 0) (< ox vsx))
+			     do
+			       (loop for fd from 0 below (depth f)
+				  for ix1 = #i(((vsx * oy)+ox)* depth(v)+fd)
+				  for ix2 = #i(((sx(f) * fy)+fx)*depth(f)+fd)
+				  do
+				    (incf #i(dw(f)[ix2]) #i(w(v)[ix1]*!chain-grad))
+				    (incf #i(dw(v)[ix1]) #i(w(f)[ix2]*!chain-grad))
+				    ))) ;; ---
+		     (incf (aref (dw biases) d) chain-grad)
+		     )))
+      )))

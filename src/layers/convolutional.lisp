@@ -73,10 +73,10 @@
 
 
 (defmethod backward ((input convolutional) &optional index)
-  (with-slots (in-act out-act out-depth pad filters biases) input
+  (with-slots (in-act out-act out-sx out-sy out-depth pad stride filters biases) input
     (let* ((V in-act)
-	   (vsx (sx vol))
-	   (vsy (sy vol))
+	   (vsx (sx in-act))
+	   (vsy (sy in-act))
 	   (xystride stride))
       (setf (dw V) (make-array (array-dimension (w V) 0) :initial-element 0.0))
       (loop for d from 0 below out-depth
@@ -90,7 +90,7 @@
 	      do
 		(loop for ax from 0 below out-sx
 		   for x = (+ x xystride)
-		   for chain-grad = (get-grad out-act ax ay d)
+		   for chain-grad = (grad out-act ax ay d)
 		   do
 		   ;; ---
 		     (loop for fy from 0 below (sy f)

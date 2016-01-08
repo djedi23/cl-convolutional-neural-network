@@ -34,6 +34,9 @@
 		    )))))
 
 
-(is-layer 'svm)
+(ok (cnn::is-layer 'svm))
+(ok (cnn::is-layer 'fully-connected))
+(ok (not (cnn::is-layer 'net)))
+(ok (not (cnn::is-layer 'unknown-class)))
 
 (finalize)
